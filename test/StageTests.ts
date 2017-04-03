@@ -13,7 +13,7 @@ export class StageTests {
     private pathHelper: PathHelper;
 
     public before() {
-        this.pathHelper = new PathHelper('c:/temp/snclienttest', 'c:/temp/snclienttest/node_modules/sn-client-js');
+        this.pathHelper = new PathHelper(process.cwd(), `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`);
         this.stage = new Stage(this.pathHelper);
     }
 
