@@ -8,7 +8,7 @@ gulp.task('clean', function () {
     return del([
         './tmp',
         './dist',
-        './dist_test',
+        './dist_tests',
         './coverage',
         './coverage-report'
     ]);

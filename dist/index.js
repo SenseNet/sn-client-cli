@@ -10,80 +10,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const CommadLineArgs = require("command-line-args");
 const CommandLineCommands = require("command-line-commands");
-const CommandLineUsage = require("command-line-usage");
+const help_1 = require("./help");
 const initializer_1 = require("./initializer");
+const sn_fetch_types_1 = require("./sn-fetch-types");
 const snconfigfieldmodelstore_1 = require("./utils/snconfig/snconfigfieldmodelstore");
+const CMD_INIT = 'init';
+const CMD_FETCH_TYPES = 'fetch-types';
+const CMD_HELP = 'help';
 (() => __awaiter(this, void 0, void 0, function* () {
     yield initializer_1.Initializer.Init();
-    const validCommands = ['init', 'fetch-types', 'help'];
+    const validCommands = [CMD_INIT, CMD_FETCH_TYPES, CMD_HELP];
     const validOptions = snconfigfieldmodelstore_1.SnConfigFieldModelStore.GetCommandOptions();
-    const definitionDocs = [
-        {
-            header: 'SN-Client-CLI',
-            content: 'Command line tool for [bold]{Sense/NET ECM}',
-        },
-        {
-            header: 'Synopsis',
-            content: [
-                '$ sn-client [[bold]{command}] [bold]{--}[underline]{[options]} ...',
-                '$ sn-client [bold]{help}',
-            ]
-        },
-        {
-            header: 'Commands',
-            content: [
-                {
-                    desc: 'init',
-                    example: 'Creates an initial \'sn.config.js\' for your project'
-                },
-                {
-                    desc: 'fetch-types',
-                    example: 'Downloads type definitions from a [italic]{specified} [bold]{Sense/NET ECM} repository'
-                },
-                {
-                    desc: 'help',
-                    example: 'This help screen'
-                },
-            ]
-        },
-        {
-            header: 'Options',
-            content: validOptions.map((f) => {
-                return {
-                    desc: f.FieldName,
-                    example: f.FieldDescription
-                };
-            })
-        },
-        {
-            header: 'Examples',
-            content: [
-                {
-                    desc: '1. Initializes an sn-client config file. ',
-                    example: '$ sn-client init'
-                },
-                {
-                    desc: '2. Fetching type definitions. ',
-                    example: '$ sn-client fetch-types'
-                }
-            ]
-        },
-        {
-            content: 'Project home: [underline]{https://github.com/SenseNet/sn-client-cli}'
-        }
-    ];
     try {
         const { command, argv } = CommandLineCommands(validCommands);
-        console.log('Command: ', command);
         const options = CommadLineArgs(validOptions.map((op) => {
             return {
                 name: op.FieldName
             };
         }));
-        console.log('Options: ', options);
+        initializer_1.Initializer.SnConfigReader.OverrideConfig(options);
+        switch (command) {
+            case CMD_INIT:
+                console.error('Not implemented yet! :(');
+                break;
+            case CMD_FETCH_TYPES:
+                sn_fetch_types_1.DoFetchTypes();
+                break;
+            case CMD_HELP:
+                help_1.Help.Show(validOptions);
+            default:
+                break;
+        }
     }
     catch (error) {
-        console.log(CommandLineUsage(definitionDocs));
+        help_1.Help.Show(validOptions);
     }
 }))();
 //# sourceMappingURL=index.js.map

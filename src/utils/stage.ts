@@ -57,7 +57,7 @@ export class Stage {
             .resume();
     }
 
-    private async UpdateModuleAsync() {
+    public async UpdateModuleAsync() {
 
         await Gulp.src([
             `./tmp/src/**/*.ts`,
@@ -78,9 +78,9 @@ export class Stage {
      */
     public async CompileAsync() {
         try {
-            const buildResult = await this.CallGulpRunAsync('tsc', this.TempFolderPath);
-            const testResult = await this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
-            const updateModuleResult = await this.UpdateModuleAsync();
+            await this.CallGulpRunAsync('tsc', this.TempFolderPath);
+            await this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
+            await this.UpdateModuleAsync();
 
         } catch (error) {
             console.log('Failed to build types');

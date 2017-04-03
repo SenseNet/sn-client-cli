@@ -9,7 +9,7 @@ import { Download } from "./utils/download";
  */
 
 const SN_REPOSITORY_URL_POSTFIX = '/Root/System/Schema/Metadata/TypeScript/meta.zip';
-export async function Exec() {
+export async function DoFetchTypes() {
     console.log('Sn-Fetch-Types starting...');
     await Initializer.Stage.PrepareAsync();
     console.log('Checking sn.config.js...');

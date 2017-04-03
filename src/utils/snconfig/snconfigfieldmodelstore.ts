@@ -45,6 +45,10 @@ export class SnConfigFieldModelStore {
         return found !== undefined;
     }
 
+    /**
+     * Gets the fields which are available for command line option input
+     * @returns {SnCofigFieldModel[]} The listof the fields
+     */
     public static GetCommandOptions(): SnConfigFieldModel[] {
         const items: SnConfigFieldModel[] = [];
         for (const field in this.store) {

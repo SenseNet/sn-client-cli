@@ -46,6 +46,15 @@ export class Ask {
         });
     }
 
+    public static createPromptQuestionFromConfigName(fieldName: string) {
+        const cfg = SnConfigFieldModelStore.Get(fieldName);
+        return {
+            description: cfg.Question,   // ??
+            hidden: cfg.Behavior | SnConfigBehavior.HideConsoleInput,
+            name: cfg.FieldName,
+        };
+    }
+
     /**
      * Asks about a list of provided config values
      * @param missingConfigs {K[]} A keys from SnConfigModel's fields which has to be asked
@@ -53,14 +62,7 @@ export class Ask {
     public static async MissingConfigs<K extends keyof SnConfigModel>(...missingConfigs: K[]): Promise<Partial<SnConfigModel>> {
         return new Promise<Partial<SnConfigModel>>((resolve, reject) => {
             Prompt.start();
-            const configs = missingConfigs.map((fieldName) => {
-                const cfg = SnConfigFieldModelStore.Get(fieldName);
-                return {
-                    description: cfg.Question,   // ??
-                    hidden: cfg.Behavior | SnConfigBehavior.HideConsoleInput,
-                    name: cfg.FieldName,
-                };
-            });
+            const configs = missingConfigs.map(this.createPromptQuestionFromConfigName);
             Prompt.get(configs, (err, res) => {
                 resolve();
             });

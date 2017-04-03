@@ -61,4 +61,16 @@ export class SnConfigReader {
 
         return this.Config;
     }
+
+    /**
+     * Overrides the current config with the provided values
+     * @param newConfig {Partial<SnCnofigModel>} The new config values
+     */
+    public OverrideConfig(newConfig: Partial<SnConfigModel>) {
+        for (const field in newConfig) {
+            if (newConfig[field]) {
+                this.Config[field] = newConfig[field];
+            }
+        }
+    }
 }
