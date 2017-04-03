@@ -39,6 +39,7 @@ const CMD_HELP = 'help';
 
     } catch (error) {
         Help.Show(validOptions);
+        process.exit(0);
     }
 
 })();

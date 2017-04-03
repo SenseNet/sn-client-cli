@@ -44,6 +44,7 @@ const CMD_HELP = 'help';
     }
     catch (error) {
         help_1.Help.Show(validOptions);
+        process.exit(0);
     }
 }))();
 //# sourceMappingURL=index.js.map
