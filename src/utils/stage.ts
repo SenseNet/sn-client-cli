@@ -43,9 +43,8 @@ export class Stage {
      */
     public async PrepareAsync() {
         this.Cleanup();
-        return await Gulp.src([
+        const task = Gulp.src([
             `./src/**/*.ts`,
-            `./src_commands/**/*.ts`,
             `./test/**/*.ts`,
             `!./src/SN.d.ts`,
             `./tsconfig.json`,
@@ -53,23 +52,22 @@ export class Stage {
                 base: this.paths.SnClientPath,
                 cwd: this.paths.SnClientPath,
             })
-            .pipe(Gulp.dest(this.TempFolderPath))
-            .resume();
+            .pipe(Gulp.dest(this.TempFolderPath));
+        await task.resume();
     }
 
     public async UpdateModuleAsync() {
-
-        await Gulp.src([
-            `./tmp/src/**/*.ts`,
-            `./tmp/dist/**/*.ts`,
+        const task = Gulp.src([
+            `./src/**/*.ts`,
+            `./test/**/*.ts`,
             `!./src/SN.d.ts`,
+            `./tsconfig.json`,
         ], {
-                base: this.paths.SnClientPath,
-                cwd: this.paths.SnClientPath,
+                base: this.TempFolderPath,
+                cwd: this.TempFolderPath,
             })
-            .pipe(Gulp.dest(this.paths.SnClientPath))
-            .resume();
-        this.Cleanup();
+            .pipe(Gulp.dest(this.paths.SnClientPath));
+        await task.resume();
     }
 
     /**
@@ -77,14 +75,10 @@ export class Stage {
      * @throws {Error} if the build or the test has been failed
      */
     public async CompileAsync() {
-        try {
-            await this.CallGulpRunAsync('tsc', this.TempFolderPath);
-            await this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
-            await this.UpdateModuleAsync();
-        } catch (error) {
-            console.log('Failed to build types');
-            this.Cleanup();
-        }
+        await this.CallGulpRunAsync('tsc', this.TempFolderPath);
+        await this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
+        await this.UpdateModuleAsync();
+        await this.Cleanup();
     }
 
     public async CallGulpRunAsync(command: string, workingDir: string): Promise<any> {

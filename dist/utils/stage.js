@@ -47,9 +47,8 @@ class Stage {
     PrepareAsync() {
         return __awaiter(this, void 0, void 0, function* () {
             this.Cleanup();
-            return yield Gulp.src([
+            const task = Gulp.src([
                 `./src/**/*.ts`,
-                `./src_commands/**/*.ts`,
                 `./test/**/*.ts`,
                 `!./src/SN.d.ts`,
                 `./tsconfig.json`,
@@ -57,23 +56,23 @@ class Stage {
                 base: this.paths.SnClientPath,
                 cwd: this.paths.SnClientPath,
             })
-                .pipe(Gulp.dest(this.TempFolderPath))
-                .resume();
+                .pipe(Gulp.dest(this.TempFolderPath));
+            yield task.resume();
         });
     }
     UpdateModuleAsync() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield Gulp.src([
-                `./tmp/src/**/*.ts`,
-                `./tmp/dist/**/*.ts`,
+            const task = Gulp.src([
+                `./src/**/*.ts`,
+                `./test/**/*.ts`,
                 `!./src/SN.d.ts`,
+                `./tsconfig.json`,
             ], {
-                base: this.paths.SnClientPath,
-                cwd: this.paths.SnClientPath,
+                base: this.TempFolderPath,
+                cwd: this.TempFolderPath,
             })
-                .pipe(Gulp.dest(this.paths.SnClientPath))
-                .resume();
-            this.Cleanup();
+                .pipe(Gulp.dest(this.paths.SnClientPath));
+            yield task.resume();
         });
     }
     /**
@@ -82,15 +81,10 @@ class Stage {
      */
     CompileAsync() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield this.CallGulpRunAsync('tsc', this.TempFolderPath);
-                yield this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
-                yield this.UpdateModuleAsync();
-            }
-            catch (error) {
-                console.log('Failed to build types');
-                this.Cleanup();
-            }
+            yield this.CallGulpRunAsync('tsc', this.TempFolderPath);
+            yield this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
+            yield this.UpdateModuleAsync();
+            yield this.Cleanup();
         });
     }
     CallGulpRunAsync(command, workingDir) {
