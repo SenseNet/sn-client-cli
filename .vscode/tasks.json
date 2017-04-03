@@ -23,6 +23,14 @@
             "taskName": "build",
             "args": ["run", "build"],
             "isBuildCommand": true
+        },
+        {
+            "taskName": "build:tests",
+            "args": [
+                "run",
+                "pretest"
+            ],
+            "isBuildCommand": true
         }        
     ]
 }

@@ -7,13 +7,34 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Debug CLI",
             "program": "${workspaceRoot}\\src\\index.ts",
             "outFiles": [
                 "${workspaceRoot}\\dist\\**\\*.js"
             ],
             "console": "integratedTerminal",
             "preLaunchTask": "build"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug tests",
+            "runtimeExecutable": "mocha",
+            "windows": {
+                "runtimeExecutable": "mocha.cmd"
+            },
+            "preLaunchTask": "build:tests",
+            "runtimeArgs": [
+                "--debug-brk",
+                "-p",
+                "tsconfig.test.json",
+                "dist_tests/test/index.js"
+            ],
+            "program": "${workspaceRoot}\\test\\index.ts",
+            "outFiles": [
+                "${workspaceRoot}\\dist_tests\\**\\*.js"
+            ],
+            "port": 5858
         },
         {
             "type": "node",

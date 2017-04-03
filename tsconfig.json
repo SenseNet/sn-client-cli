@@ -1,28 +1,21 @@
 {
     "compilerOptions": {
-        "removeComments": true,
-        "noImplicitAny": false,
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "declaration": false,
-        "preserveConstEnums": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
         "outDir": "./dist",
+        "module": "commonjs",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es2016",
+
+        "declaration": true,
+        "sourceMap": true,
+        "inlineSources": true,
         "types": [
-            "chai",
+            "node",
             "mocha",
-            "node"
+            "chai"
         ]
-    },
-    "exclude": [
-        "node_modules",
-        "dist"
-    ],
-    "compileOnSave": false,
+    }, 
     "files": [
-        "src/index.ts"
+        "./src/index.ts"
     ]
 }

@@ -7,11 +7,12 @@
     "sn-client": "./bin/sn-client.cmd"
   },
   "scripts": {
-    "pretest": "tsc -p tsconfig.test.json",
-    "test": "nyc mocha -p tsconfig.test.json dist/test/index.js",
+    "pretest": "npm run build:tests",
+    "test": "nyc mocha -p tsconfig.test.json dist_tests/test/index.js",
     "posttest": "nyc report --reporter=json && nyc report --reporter=lcov",
     "prebuild": "gulp clean && npm run tslint",
     "build": "tsc",
+    "build:tests": "tsc -p tsconfig.test.json",
     "typedoc": "gulp typedoc",
     "tslint": "tslint --project tsconfig.json && tslint --project tsconfig.test.json",
     "commit": "git-cz"
@@ -34,9 +35,11 @@
   },
   "homepage": "https://github.com/SenseNet/sn-client-cli#readme",
   "devDependencies": {
+    "@types/chai": "^3.4.35",
     "chai": "^3.5.0",
     "commitizen": "^2.9.6",
     "mocha": "^3.2.0",
+    "mocha-typescript": "^1.0.23",
     "prompt": "^1.0.0",
     "tslint": "^5.0.0",
     "typedoc": "^0.5.9",
@@ -60,5 +63,8 @@
   },
   "czConfig": {
     "path": "node_modules/cz-conventional-changelog"
+  },
+  "nyc": {
+    "exclude": "dist_tests/test/**/*.*"
   }
 }
