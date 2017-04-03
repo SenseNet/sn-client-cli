@@ -8,6 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Chai = require("chai");
 const mocha_typescript_1 = require("mocha-typescript");
@@ -35,6 +43,14 @@ let StageTests = class StageTests {
         const promise = this.stage.UpdateModuleAsync();
         expect(promise).to.be.an.instanceOf(Promise);
     }
+    CallGulpAsync() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.stage.CallGulpRunAsync('@echo test', __dirname);
+        });
+    }
+    CallGulpAsyncError(done) {
+        this.stage.CallGulpRunAsync('badCommand', __dirname).then(() => { done('Error expeced'); }, (err) => { done(); });
+    }
 };
 __decorate([
     mocha_typescript_1.test('Should have a proper temp folder path'),
@@ -60,6 +76,18 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], StageTests.prototype, "UpdatePromise", null);
+__decorate([
+    mocha_typescript_1.test('CallGulpAsync'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], StageTests.prototype, "CallGulpAsync", null);
+__decorate([
+    mocha_typescript_1.test('CallGulpAsyncError'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], StageTests.prototype, "CallGulpAsyncError", null);
 StageTests = __decorate([
     mocha_typescript_1.suite('Stage tests')
 ], StageTests);

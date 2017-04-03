@@ -81,14 +81,13 @@ export class Stage {
             await this.CallGulpRunAsync('tsc', this.TempFolderPath);
             await this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
             await this.UpdateModuleAsync();
-
         } catch (error) {
             console.log('Failed to build types');
             this.Cleanup();
         }
     }
 
-    private async CallGulpRunAsync(command: string, workingDir: string): Promise<any> {
+    public async CallGulpRunAsync(command: string, workingDir: string): Promise<any> {
         return new Promise((resolve, reject) => {
             GulpRun(command, {
                 cwd: workingDir,

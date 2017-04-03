@@ -40,4 +40,17 @@ export class StageTests {
         expect(promise).to.be.an.instanceOf(Promise);
     }
 
+    @test('CallGulpAsync')
+    public async CallGulpAsync() {
+        await this.stage.CallGulpRunAsync('@echo test', __dirname);
+    }
+
+    @test('CallGulpAsyncError')
+    public CallGulpAsyncError(done) {
+        this.stage.CallGulpRunAsync('badCommand', __dirname).then(
+            () => { done('Error expeced'); },
+            (err) => { done(); }
+        );
+    }
+
 }
