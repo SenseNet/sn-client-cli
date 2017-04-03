@@ -20,6 +20,9 @@
             false
         ],
         "object-literal-sort-keys": false,
-        "no-string-literal": false
+        "no-string-literal": false,
+        "trailing-comma": [
+            false
+        ]
     }
 }

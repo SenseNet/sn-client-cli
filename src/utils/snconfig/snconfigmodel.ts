@@ -9,7 +9,8 @@ export class SnConfigModel {
      * The root URL for the Sense/Net repository (e.g.: demo.sensenet.com)
      */
     @SnConfigField({
-        Behavior: SnConfigBehavior.AllowFromConfig,
+        Behavior: SnConfigBehavior.AllowFromConfig | SnConfigBehavior.AllowFromCommandLine,
+        FieldDescription: 'URL to the repository (e.g.: demo.sensenet.com)',
         Question: 'Please enter your Sense/Net Site URL(e.g.:demo.sensenet.com):',
     })
     public RepositoryUrl: string;
@@ -19,6 +20,7 @@ export class SnConfigModel {
      */
     @SnConfigField({
         Behavior: SnConfigBehavior.AllowFromConfig,
+        FieldDescription: 'Name for a user',
         Question: 'Please enter the username: ',
     })
     public UserName?: string;

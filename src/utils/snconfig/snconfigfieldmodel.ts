@@ -10,6 +10,11 @@ export class SnConfigFieldModel {
     public FieldName?: string;
 
     /**
+     * Optional description
+     */
+    public FieldDescription?: string;
+
+    /**
      * The question to be asked when the field is needed but not provided
      */
     public Question: string;

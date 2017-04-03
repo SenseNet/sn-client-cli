@@ -1,4 +1,5 @@
-import { SnConfigFieldModel } from './';
+import { SnConfigBehavior } from './snconfigbehavior';
+import { SnConfigFieldModel } from './snconfigfieldmodel';
 
 /**
  * Class that stores the model data for the SnConfigModel's fields, filled by the SnConfigField decorator
@@ -42,5 +43,15 @@ export class SnConfigFieldModelStore {
     public static Contains(fieldName: string): boolean {
         const found = this.store[fieldName];
         return found !== undefined;
+    }
+
+    public static GetCommandOptions(): SnConfigFieldModel[] {
+        const items: SnConfigFieldModel[] = [];
+        for (const field in this.store) {
+            if (field && (this.store[field].Behavior & SnConfigBehavior.AllowFromCommandLine) === SnConfigBehavior.AllowFromCommandLine) {
+                items.push(this.store[field]);
+            }
+        }
+        return items;
     }
 }

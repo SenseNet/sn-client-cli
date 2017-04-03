@@ -14,8 +14,14 @@ export enum SnConfigBehavior {
     AllowFromConfig = 1 << 0,
 
     /**
+     * Allows a config entry to be specified via command line option. Recommended for non-confidential values
+     */
+    AllowFromCommandLine = 1 << 1,
+
+    /**
      * The console input will be hidden, when a value is asked.
      * Recommended for confidential values (e.g. password for authentication)
      */
-    HideConsoleInput = 1 << 1,
+    HideConsoleInput = 1 << 2,
+
 }

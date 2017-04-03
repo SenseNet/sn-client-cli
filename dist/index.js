@@ -1,13 +1,22 @@
-import * as CommadLineArgs from 'command-line-args';
-import * as CommandLineCommands from 'command-line-commands';
-import * as CommandLineUsage from 'command-line-usage';
-import { Initializer } from './initializer';
-import { SnConfigFieldModelStore } from './utils/snconfig/snconfigfieldmodelstore';
-
-(async () => {
-    await Initializer.Init();
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const CommadLineArgs = require("command-line-args");
+const CommandLineCommands = require("command-line-commands");
+const CommandLineUsage = require("command-line-usage");
+const initializer_1 = require("./initializer");
+const snconfigfieldmodelstore_1 = require("./utils/snconfig/snconfigfieldmodelstore");
+(() => __awaiter(this, void 0, void 0, function* () {
+    yield initializer_1.Initializer.Init();
     const validCommands = ['init', 'fetch-types', 'help'];
-    const validOptions = SnConfigFieldModelStore.GetCommandOptions();
+    const validOptions = snconfigfieldmodelstore_1.SnConfigFieldModelStore.GetCommandOptions();
     const definitionDocs = [
         {
             header: 'SN-Client-CLI',
@@ -63,7 +72,6 @@ import { SnConfigFieldModelStore } from './utils/snconfig/snconfigfieldmodelstor
             content: 'Project home: [underline]{https://github.com/SenseNet/sn-client-cli}'
         }
     ];
-
     try {
         const { command, argv } = CommandLineCommands(validCommands);
         console.log('Command', command);
@@ -73,8 +81,9 @@ import { SnConfigFieldModelStore } from './utils/snconfig/snconfigfieldmodelstor
             };
         }));
         console.log('Options', options);
-    } catch (error) {
+    }
+    catch (error) {
         console.log(CommandLineUsage(definitionDocs));
     }
-
-})();
+}))();
+//# sourceMappingURL=index.js.map
