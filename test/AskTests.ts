@@ -1,5 +1,6 @@
 import * as Chai from 'chai';
 import { suite, test } from 'mocha-typescript';
+import * as Prompt from 'prompt';
 import { Ask } from '../src/utils/ask';
 
 const expect = Chai.expect;
@@ -11,6 +12,17 @@ export class AskTests {
     public TextAsync() {
         const promise = Ask.TextAsync('Text');
         expect(promise).to.be.instanceOf(Promise, 'Should return a promise');
+    }
+
+    @test('resolve with std in')
+    public TextStdIn(done) {
+        Prompt.override = {
+            Text: 'alma'
+        };
+        Ask.TextAsync('Text').then((result) => {
+            expect(result).to.be.eq('alma');
+            done();
+        });
     }
 
     @test('should return an awaitable Promise')

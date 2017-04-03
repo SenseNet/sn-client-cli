@@ -11,12 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Chai = require("chai");
 const mocha_typescript_1 = require("mocha-typescript");
+const Prompt = require("prompt");
 const ask_1 = require("../src/utils/ask");
 const expect = Chai.expect;
 let AskTests = class AskTests {
     TextAsync() {
         const promise = ask_1.Ask.TextAsync('Text');
         expect(promise).to.be.instanceOf(Promise, 'Should return a promise');
+    }
+    TextStdIn(done) {
+        Prompt.override = {
+            Text: 'alma'
+        };
+        ask_1.Ask.TextAsync('Text').then((result) => {
+            expect(result).to.be.eq('alma');
+            done();
+        });
     }
     PasswordAsync() {
         const promise = ask_1.Ask.PasswordAsync('Password');
@@ -37,6 +47,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AskTests.prototype, "TextAsync", null);
+__decorate([
+    mocha_typescript_1.test('resolve with std in'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AskTests.prototype, "TextStdIn", null);
 __decorate([
     mocha_typescript_1.test('should return an awaitable Promise'),
     __metadata("design:type", Function),
