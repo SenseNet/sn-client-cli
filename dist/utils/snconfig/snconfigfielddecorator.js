@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const _1 = require("./");
+const snconfigfieldmodelstore_1 = require("./snconfigfieldmodelstore");
 function SnConfigField(model) {
     return (target, propertyName) => {
         model.FieldName = propertyName;
-        _1.SnConfigFieldModelStore.Add(model);
+        snconfigfieldmodelstore_1.SnConfigFieldModelStore.Add(model);
     };
 }
 exports.SnConfigField = SnConfigField;

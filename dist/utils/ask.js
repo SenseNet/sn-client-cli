@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Prompt = require("prompt");
-const snconfig_1 = require("./snconfig");
+const snconfigbehavior_1 = require("./snconfig/snconfigbehavior");
+const snconfigfieldmodelstore_1 = require("./snconfig/snconfigfieldmodelstore");
 class Ask {
     static TextAsync(question) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -42,10 +43,10 @@ class Ask {
             return new Promise((resolve, reject) => {
                 Prompt.start();
                 const configs = missingConfigs.map((fieldName) => {
-                    const cfg = snconfig_1.SnConfigFieldModelStore.Get(fieldName);
+                    const cfg = snconfigfieldmodelstore_1.SnConfigFieldModelStore.Get(fieldName);
                     return {
                         description: cfg.Question,
-                        hidden: cfg.Behavior | snconfig_1.SnConfigBehavior.HideConsoleInput,
+                        hidden: cfg.Behavior | snconfigbehavior_1.SnConfigBehavior.HideConsoleInput,
                         name: cfg.FieldName,
                     };
                 });

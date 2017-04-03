@@ -74,13 +74,13 @@ const snconfigfieldmodelstore_1 = require("./utils/snconfig/snconfigfieldmodelst
     ];
     try {
         const { command, argv } = CommandLineCommands(validCommands);
-        console.log('Command', command);
+        console.log('Command: ', command);
         const options = CommadLineArgs(validOptions.map((op) => {
             return {
                 name: op.FieldName
             };
         }));
-        console.log('Options', options);
+        console.log('Options: ', options);
     }
     catch (error) {
         console.log(CommandLineUsage(definitionDocs));

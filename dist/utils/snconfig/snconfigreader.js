@@ -9,13 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Path = require("path");
-const _1 = require("../");
-const _2 = require("./");
+const ask_1 = require("../ask");
+const snconfigbehavior_1 = require("./snconfigbehavior");
+const snconfigfieldmodelstore_1 = require("./snconfigfieldmodelstore");
+const snconfigmodel_1 = require("./snconfigmodel");
 const SN_CONFIG_NAME = 'sn.config.js';
 class SnConfigReader {
     constructor(projectDirectory) {
         this.projectDirectory = projectDirectory;
-        this.Config = new _2.SnConfigModel();
+        this.Config = new snconfigmodel_1.SnConfigModel();
     }
     ReadConfigFile() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -25,7 +27,7 @@ class SnConfigReader {
             }
             catch (error) {
                 console.log(`No '${SN_CONFIG_NAME}' file found in the project root.`);
-                cfg = new _2.SnConfigModel();
+                cfg = new snconfigmodel_1.SnConfigModel();
             }
             this.Config = cfg;
         });
@@ -33,17 +35,17 @@ class SnConfigReader {
     ValidateAsync(...requiredValues) {
         return __awaiter(this, void 0, void 0, function* () {
             for (const fieldName of requiredValues) {
-                const fieldModel = _2.SnConfigFieldModelStore.Get(fieldName);
+                const fieldModel = snconfigfieldmodelstore_1.SnConfigFieldModelStore.Get(fieldName);
                 const value = this.Config[fieldModel.FieldName];
-                if (value && value.length && !(fieldModel.Behavior & _2.SnConfigBehavior.AllowFromConfig)) {
+                if (value && value.length && !(fieldModel.Behavior & snconfigbehavior_1.SnConfigBehavior.AllowFromConfig)) {
                     throw Error(`Field '${fieldName}' is not allowed in snconfig file!`);
                 }
                 if (!value || !value.length) {
                     this.Config[fieldModel.FieldName] =
-                        (fieldModel.Behavior & _2.SnConfigBehavior.HideConsoleInput)
+                        (fieldModel.Behavior & snconfigbehavior_1.SnConfigBehavior.HideConsoleInput)
                             ?
-                                yield _1.Ask.PasswordAsync(fieldModel.Question) :
-                            yield _1.Ask.TextAsync(fieldModel.Question);
+                                yield ask_1.Ask.PasswordAsync(fieldModel.Question) :
+                            yield ask_1.Ask.TextAsync(fieldModel.Question);
                 }
             }
             return this.Config;

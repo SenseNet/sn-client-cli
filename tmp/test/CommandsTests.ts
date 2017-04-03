@@ -1,44 +1,37 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const Path = require("path");
-const utils_1 = require("../src/utils");
-const snconfig_1 = require("../src/utils/snconfig");
-const Chai = require("chai");
+import * as Path from 'path';
+import { Ask, Download, PathHelper, Stage } from '../src/utils';
+import { SnConfigBehavior, SnConfigFieldModel, SnConfigFieldModelStore, SnConfigModel, SnConfigReader } from '../src/utils/snconfig';
+
+import * as Chai from 'chai';
 const expect = Chai.expect;
+
 describe('Commands', () => {
     describe('Utils', () => {
         describe('Ask', () => {
             describe('#TextAsync(question)', () => {
                 it('should return an awaitable Promise', () => {
-                    const promise = utils_1.Ask.TextAsync('Question');
+                    const promise = Ask.TextAsync('Question');
                     expect(promise).to.be.an.instanceOf(Promise);
                 });
             });
             describe('#PasswordAsync(question)', () => {
                 it('should return an awaitable Promise', () => {
-                    const promise = utils_1.Ask.PasswordAsync('Question');
+                    const promise = Ask.PasswordAsync('Question');
                     expect(promise).to.be.an.instanceOf(Promise);
                 });
             });
             describe('#MissingConfigs(...configs)', () => {
                 it('should return an awaitable Promise', () => {
-                    const promise = utils_1.Ask.MissingConfigs('UserName');
+                    const promise = Ask.MissingConfigs('UserName');
                     expect(promise).to.be.an.instanceOf(Promise);
                 });
             });
         });
+
         describe('Download', () => {
-            let download;
+            let download: Download;
             beforeEach(() => {
-                download = new utils_1.Download('demo.sensenet.com', 'index.html');
+                download = new Download('demo.sensenet.com', 'index.html');
             });
             it('Shouldn\'t have custom headers by default', () => {
                 expect(Object.keys(download['headers']).length).to.be.eq(0);
@@ -52,17 +45,21 @@ describe('Commands', () => {
                 expect(buffer).to.be.an.instanceOf(Promise);
             });
         });
+
         describe('PathHelper', () => {
-            let pathHelper;
+            let pathHelper: PathHelper;
+
             beforeEach(() => {
-                pathHelper = new utils_1.PathHelper('c:/temp/package/../package', 'c:/temp/package/../package/node_modules/sn-client-js');
+                pathHelper = new PathHelper('c:/temp/package/../package', 'c:/temp/package/../package/node_modules/sn-client-js');
             });
+
             it('Should normalize PackageRoot path', () => {
                 expect(pathHelper.PackageRootPath).to.be.eq(`c:${Path.sep}temp${Path.sep}package`);
             });
             it('Should normalize SnClient path', () => {
                 expect(pathHelper.SnClientPath).to.be.eq(`c:${Path.sep}temp${Path.sep}package${Path.sep}node_modules${Path.sep}sn-client-js`);
             });
+
             it('Should provide realible relative path to PackageRootPath', () => {
                 expect(pathHelper.GetRelativeToPackageRootPath('./alma')).to.be.eq(Path.join(pathHelper.PackageRootPath, './alma'));
             });
@@ -71,11 +68,11 @@ describe('Commands', () => {
             });
         });
         describe('stage', () => {
-            let stage;
-            let pathHelper;
+            let stage: Stage;
+            let pathHelper: PathHelper;
             beforeEach(() => {
-                pathHelper = new utils_1.PathHelper('c:/temp/snclienttest', 'c:/temp/snclienttest/node_modules/sn-client-js');
-                stage = new utils_1.Stage(pathHelper);
+                pathHelper = new PathHelper('c:/temp/snclienttest', 'c:/temp/snclienttest/node_modules/sn-client-js');
+                stage = new Stage(pathHelper);
             });
             it('Should have a proper temp folder path', () => {
                 expect(stage.TempFolderPath).to.be.eq(Path.join(pathHelper.SnClientPath, 'tmp'));
@@ -96,26 +93,30 @@ describe('Commands', () => {
         describe('SnConfig', () => {
             describe('SnConfigFieldModel', () => {
                 it('Should be constructed with SnConfigBehavior.Default', () => {
-                    const fieldModel = new snconfig_1.SnConfigFieldModel();
-                    expect(fieldModel.Behavior).to.be.eq(snconfig_1.SnConfigBehavior.Default);
+                    const fieldModel = new SnConfigFieldModel();
+                    expect(fieldModel.Behavior).to.be.eq(SnConfigBehavior.Default);
                 });
             });
+
             describe('SnConfigModelStore', () => {
                 it('Should throw error if entity isn\'t in the store ', () => {
-                    const find = () => { snconfig_1.SnConfigFieldModelStore.Get('exampleFieldName'); };
+                    const find = () => { SnConfigFieldModelStore.Get('exampleFieldName'); };
                     expect(find).to.throw(Error);
                 });
+
                 it('Should throw an error if you try to add a field that already exists', () => {
-                    const add = () => { snconfig_1.SnConfigFieldModelStore.Add({ FieldName: 'Example', Question: 'ExampleQuestion', Behavior: snconfig_1.SnConfigBehavior.Default }); };
-                    add();
+                    const add = () => { SnConfigFieldModelStore.Add({ FieldName: 'Example', Question: 'ExampleQuestion', Behavior: SnConfigBehavior.Default }); };
+                    add();  // add once
                     expect(add).to.throw(Error);
                 });
             });
+
             describe('SnConfiReader', () => {
-                let reader;
+                let reader: SnConfigReader;
                 beforeEach(() => {
-                    reader = new snconfig_1.SnConfigReader(process.cwd());
+                    reader = new SnConfigReader(process.cwd());
                 });
+
                 describe('#ReadConfigFile()', () => {
                     it('should return an awaitable promise', () => {
                         const promise = reader.ReadConfigFile();
@@ -127,15 +128,15 @@ describe('Commands', () => {
                         const promise = reader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
                         expect(promise).to.be.an.instanceOf(Promise);
                     });
-                    it('Shouldn resolve when all fields are provided', () => __awaiter(this, void 0, void 0, function* () {
+                    it('Shouldn resolve when all fields are provided', async () => {
                         reader.Config = {
                             RepositoryUrl: 'url',
                             UserName: 'username',
                             Password: 'password',
                         };
-                        const cfg = yield reader.ValidateAsync('RepositoryUrl');
+                        const cfg = await reader.ValidateAsync('RepositoryUrl');
                         expect(cfg.RepositoryUrl).to.be.eq('url');
-                    }));
+                    });
                     it('Should throw an error if a field is provided but disallowed form config by behavior', (done) => {
                         reader.Config = {
                             RepositoryUrl: '',
@@ -144,13 +145,13 @@ describe('Commands', () => {
                         };
                         reader.ValidateAsync('Password')
                             .then(() => {
-                            done('Exception expcected');
-                        })
+                                done('Exception expcected');
+                            })
                             .catch(() => done());
                     });
                 });
             });
         });
     });
-});
-//# sourceMappingURL=CommandsTests.js.map
+})
+;
