@@ -20,7 +20,6 @@ const SN_REPOSITORY_URL_POSTFIX = '/Root/System/Schema/Metadata/TypeScript/meta.
 function DoFetchTypes() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('Sn-Fetch-Types starting...');
-        yield initializer_1.Initializer.Stage.PrepareAsync();
         console.log('Checking sn.config.js...');
         const cfg = yield initializer_1.Initializer.SnConfigReader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
         console.log('Downloading type definitions...');
