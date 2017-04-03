@@ -1,0 +1,60 @@
+{
+  "name": "sn-client-cli",
+  "version": "1.0.0",
+  "description": "Command line tooling for Sense/NET ECM client",
+  "main": "dist/index.js",
+  "bin": {
+    "sn-client": "./bin/sn-client.cmd"
+  },
+  "scripts": {
+    "pretest": "tsc -p tsconfig.test.js",
+    "test": "nyc mocha -p tsconfig.json dist/test/index.js",
+    "posttest": "nyc report --reporter=json && nyc report --reporter=lcov",
+    "prebuild": "gulp build:clean && npm run tslint",
+    "build": "tsc",
+    "typedoc": "gulp typedoc",
+    "tslint": "tslint --project tsconfig.json && tslint --project tsconfig.test.json",
+    "commit": "git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SenseNet/sn-client-cli.git"
+  },
+  "keywords": [
+    "sensenet",
+    "ecm",
+    "REST",
+    "CLI",
+    "API"
+  ],
+  "author": "Sense/Net <snteam@sensenet.com> (http://sensenet.com)",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/SenseNet/sn-client-cli/issues"
+  },
+  "homepage": "https://github.com/SenseNet/sn-client-cli#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "commitizen": "^2.9.6",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-promisify": "^1.2.2",
+    "gulp-typedoc": "^2.0.2",
+    "mocha": "^3.2.0",
+    "prompt": "^1.0.0",
+    "tslint": "^5.0.0",
+    "typescript": "^2.2.2"
+  },
+  "dependencies": {
+    "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.12",
+    "adm-zip": "^0.4.7",
+    "gulp-mocha": "^4.3.0",
+    "gulp-run": "^1.7.1",
+    "path": "^0.12.7"
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "quotemark": [
+            "single"
+        ],
+        "member-ordering": [
+            false
+        ],
+        "no-bitwise": false,
+        "variable-name": [
+            "allow-leading-underscore",
+            "allow-pascal-case",
+            true
+        ],
+        "max-line-length": [
+            false
+        ],
+        "no-console": [
+            false
+        ],
+        "object-literal-sort-keys": false,
+        "no-string-literal": false
+    }
+}
