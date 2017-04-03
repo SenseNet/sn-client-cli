@@ -3,12 +3,12 @@ const gulp = require('gulp');
 const typedoc = require("gulp-typedoc");
 const del = require('del');
 var run = require('gulp-run');
-const tslint = require("gulp-tslint");
 
-gulp.task('build:clean', function () {
+gulp.task('clean', function () {
     return del([
         './tmp',
         './dist',
+        './dist_test',
         './coverage',
         './coverage-report'
     ]);
