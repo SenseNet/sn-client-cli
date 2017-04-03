@@ -9,6 +9,9 @@
             "request": "launch",
             "name": "Debug CLI",
             "program": "${workspaceRoot}\\src\\index.ts",
+            "args": [
+                "fetch-types"
+            ],
             "outFiles": [
                 "${workspaceRoot}\\dist\\**\\*.js"
             ],
