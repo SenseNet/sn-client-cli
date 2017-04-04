@@ -10,9 +10,9 @@ node_js:
 before_script:
   - npm install -g gulp
 script: 
-  - npm run build
+  - npm run build && npm run test
 after_success:
-  - npm run test
+  - npm run report-coverage
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
