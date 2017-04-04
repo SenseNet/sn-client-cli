@@ -5,22 +5,32 @@ import { Stage } from "./utils/stage";
 
 export class Initializer {
 
-    private static stage: Stage;
-    public static get Stage(): Stage {
+    private constructor() { }
+
+    private static _instance: Initializer;
+    public static get Current(): Initializer {
+        if (!this._instance) {
+            this._instance = new Initializer();
+        }
+        return this._instance;
+    }
+
+    private stage: Stage;
+    public get Stage(): Stage {
         return this.stage;
     }
 
-    private static pathHelper: PathHelper;
-    public static get PathHelper(): PathHelper {
+    private pathHelper: PathHelper;
+    public get PathHelper(): PathHelper {
         return this.pathHelper;
     }
 
-    private static configReader: SnConfigReader;
-    public static get SnConfigReader(): SnConfigReader {
+    private configReader: SnConfigReader;
+    public get SnConfigReader(): SnConfigReader {
         return this.configReader;
     }
 
-    public static async Init() {
+    public async Init() {
         this.pathHelper = new PathHelper(
             process.cwd(),
             `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`,

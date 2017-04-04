@@ -17,24 +17,24 @@ const download_1 = require("./utils/download");
  *  Typescript proxy classes from a Sense/Net Content Repository
  */
 const SN_REPOSITORY_URL_POSTFIX = '/Root/System/Schema/Metadata/TypeScript/meta.zip';
-function DoFetchTypes() {
+function DoFetchTypes(initializer = initializer_1.Initializer.Current) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             console.log('Sn-Fetch-Types starting...');
             console.log('Checking sn.config.js...');
-            const cfg = yield initializer_1.Initializer.SnConfigReader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
+            const cfg = yield initializer.SnConfigReader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
             console.log('Downloading type definitions...');
             const zipBuffer = yield new download_1.Download(cfg.RepositoryUrl, SN_REPOSITORY_URL_POSTFIX)
                 .Authenticate(cfg.UserName, cfg.Password)
                 .GetAsBufferAsync();
             const zip = AdmZip(zipBuffer);
             console.log('Download completed, extracting...');
-            zip.extractAllTo(initializer_1.Initializer.Stage.TempFolderPath + Path.sep + 'src', true);
+            zip.extractAllTo(initializer.Stage.TempFolderPath + Path.sep + 'src', true);
             console.log('Files extracted, running Build...');
-            yield initializer_1.Initializer.Stage.CallGulpRunAsync('tsc', this.TempFolderPath);
-            yield initializer_1.Initializer.Stage.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
-            yield initializer_1.Initializer.Stage.UpdateModuleAsync();
-            yield initializer_1.Initializer.Stage.Cleanup();
+            yield initializer.Stage.CallGulpRunAsync('tsc', this.TempFolderPath);
+            yield initializer.Stage.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
+            yield initializer.Stage.UpdateModuleAsync();
+            yield initializer.Stage.Cleanup();
             console.log('All done.');
         }
         catch (error) {

@@ -13,16 +13,23 @@ const pathhelper_1 = require("./utils/pathhelper");
 const snconfigreader_1 = require("./utils/snconfig/snconfigreader");
 const stage_1 = require("./utils/stage");
 class Initializer {
-    static get Stage() {
+    constructor() { }
+    static get Current() {
+        if (!this._instance) {
+            this._instance = new Initializer();
+        }
+        return this._instance;
+    }
+    get Stage() {
         return this.stage;
     }
-    static get PathHelper() {
+    get PathHelper() {
         return this.pathHelper;
     }
-    static get SnConfigReader() {
+    get SnConfigReader() {
         return this.configReader;
     }
-    static Init() {
+    Init() {
         return __awaiter(this, void 0, void 0, function* () {
             this.pathHelper = new pathhelper_1.PathHelper(process.cwd(), `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`, `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-cli`);
             this.stage = new stage_1.Stage(this.pathHelper);

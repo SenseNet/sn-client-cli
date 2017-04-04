@@ -1,7 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const CommandLineUsage = require("command-line-usage");
+/**
+ * This class will be used to display help information on 'help' command or when the user enters invalit runtime arguments
+ */
 class Help {
+    /**
+     * Displays the help info.
+     * @param validOptions {SnConfigFieldModel[]} The valid option values from the SnConfigModel
+     */
     static Show(validOptions) {
         const definitionDocs = [
             {

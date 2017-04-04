@@ -17,19 +17,23 @@ const initialize_config_1 = require("./initialize-config");
 const initializer_1 = require("./initializer");
 const sn_fetch_types_1 = require("./sn-fetch-types");
 const snconfigfieldmodelstore_1 = require("./utils/snconfig/snconfigfieldmodelstore");
+/**
+ * Entry point for the 'sn-client' command
+ */
 const CMD_INIT = 'init';
 const CMD_FETCH_TYPES = 'fetch-types';
 const CMD_HELP = 'help';
 (() => __awaiter(this, void 0, void 0, function* () {
-    yield initializer_1.Initializer.Init();
-    if (!FileSystem.existsSync(Path.join(initializer_1.Initializer.PathHelper.PackageRootPath, 'package.json'))) {
+    yield initializer_1.Initializer.Current.Init();
+    const initializer = initializer_1.Initializer.Current;
+    if (!FileSystem.existsSync(Path.join(initializer.PathHelper.PackageRootPath, 'package.json'))) {
         throw Error('There is no package.json file in your working directory. Please run the tool from a root of a valid NPM package!');
     }
-    if (!FileSystem.existsSync(initializer_1.Initializer.PathHelper.SnClientPath)) {
-        throw Error(`sn-client-js package not available at '${initializer_1.Initializer.PathHelper.SnClientPath}'. Please make sure it's installed before using the tool.`);
+    if (!FileSystem.existsSync(initializer.PathHelper.SnClientPath)) {
+        throw Error(`sn-client-js package not available at '${initializer.PathHelper.SnClientPath}'. Please make sure it's installed before using the tool.`);
     }
-    if (!FileSystem.existsSync(initializer_1.Initializer.PathHelper.SnCliPath)) {
-        throw Error(`sn-client-cli package not available at '${initializer_1.Initializer.PathHelper.SnCliPath}'. Please make sure it's installed before using the tool.`);
+    if (!FileSystem.existsSync(initializer.PathHelper.SnCliPath)) {
+        throw Error(`sn-client-cli package not available at '${initializer.PathHelper.SnCliPath}'. Please make sure it's installed before using the tool.`);
     }
     const validCommands = [CMD_INIT, CMD_FETCH_TYPES, CMD_HELP];
     const validOptions = snconfigfieldmodelstore_1.SnConfigFieldModelStore.GetCommandOptions();
@@ -40,7 +44,7 @@ const CMD_HELP = 'help';
                 name: op.FieldName
             };
         }));
-        initializer_1.Initializer.SnConfigReader.OverrideConfig(options);
+        initializer.SnConfigReader.OverrideConfig(options);
         switch (command) {
             case CMD_INIT:
                 yield initialize_config_1.DoInitializeConfigs();

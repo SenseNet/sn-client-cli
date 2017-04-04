@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const snconfigbehavior_1 = require("./snconfigbehavior");
 const snconfigfielddecorator_1 = require("./snconfigfielddecorator");
 /**
- * Class that represents a typed model for the Sense/Net related configuration for an NPM Package
+ * Class that represents a typed model for the Sense/Net related configuration for an NPM Package. It's values are populated from sn.config.js, from command line option or will be asked at runtime (depending on it's behavior flags).
  */
 class SnConfigModel {
 }

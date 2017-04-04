@@ -2,7 +2,7 @@ import { SnConfigBehavior } from './snconfigbehavior';
 import { SnConfigField } from './snconfigfielddecorator';
 
 /**
- * Class that represents a typed model for the Sense/Net related configuration for an NPM Package
+ * Class that represents a typed model for the Sense/Net related configuration for an NPM Package. It's values are populated from sn.config.js, from command line option or will be asked at runtime (depending on it's behavior flags).
  */
 export class SnConfigModel {
 

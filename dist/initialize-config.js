@@ -10,12 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const Path = require("path");
 const initializer_1 = require("./initializer");
-function DoInitializeConfigs() {
+/**
+ * This function initializes a new 'sn.config.js' configuration file into an NPM package's root folder.
+ */
+function DoInitializeConfigs(initializer = initializer_1.Initializer.Current) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('Copying default config...');
         try {
-            yield initializer_1.Initializer.Stage.InitializeConfigAsync();
-            console.log(`Copied to ${initializer_1.Initializer.PathHelper.PackageRootPath}${Path.sep}sn.config.js`);
+            yield initializer.Stage.InitializeConfigAsync();
+            console.log(`Copied to ${initializer.PathHelper.PackageRootPath}${Path.sep}sn.config.js`);
         }
         catch (error) {
             console.error('There was an error initializing the config file.');

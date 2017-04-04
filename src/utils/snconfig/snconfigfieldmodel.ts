@@ -5,22 +5,22 @@ import { SnConfigBehavior } from './snconfigbehavior';
  */
 export class SnConfigFieldModel {
     /**
-     * The name of the field
+     * The name of the field (e.g. RepositoryUrl). This will be used also as a key in command line options and in the sn.config.js module
      */
     public FieldName?: string;
 
     /**
-     * Optional description
+     * Optional description. Will be dislpayed in the CLI Help screen.
      */
     public FieldDescription?: string;
 
     /**
-     * The question to be asked when the field is needed but not provided
+     * This question will be asked when the field is needed but not provided.
      */
     public Question: string;
 
     /**
-     * The behavoir of the field
+     * The behavoir of the field, can be flagged
      * @default SnConfigBehavior.Default
      */
     public Behavior: SnConfigBehavior = SnConfigBehavior.Default;

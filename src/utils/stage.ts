@@ -10,8 +10,8 @@ const TEMP_FOLDER_NAME = 'tmp';
 
 /**
  * This class is used to handle the new incoming types from the repository in a transactional way.
- * Usage
- *  - make a clean environment (temp folder)
+ * Usage:
+ *  - clean up environment (temp folder)
  *  - copy the existing client-related Typescript modules and test files (some of them will be overwritten the new ones from the repository)
  *  - build the module
  *  - run the unit tests

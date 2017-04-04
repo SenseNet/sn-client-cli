@@ -9,23 +9,28 @@ import { DoFetchTypes } from './sn-fetch-types';
 import { SnConfigFieldModelStore } from './utils/snconfig/snconfigfieldmodelstore';
 import { SnConfigModel } from "./utils/snconfig/snconfigmodel";
 
+/**
+ * Entry point for the 'sn-client' command
+ */
 const CMD_INIT = 'init';
 const CMD_FETCH_TYPES = 'fetch-types';
 const CMD_HELP = 'help';
 
 (async () => {
-    await Initializer.Init();
+    await Initializer.Current.Init();
 
-    if (!FileSystem.existsSync(Path.join(Initializer.PathHelper.PackageRootPath, 'package.json'))) {
+    const initializer = Initializer.Current;
+
+    if (!FileSystem.existsSync(Path.join(initializer.PathHelper.PackageRootPath, 'package.json'))) {
         throw Error('There is no package.json file in your working directory. Please run the tool from a root of a valid NPM package!');
     }
 
-    if (!FileSystem.existsSync(Initializer.PathHelper.SnClientPath)) {
-        throw Error(`sn-client-js package not available at '${Initializer.PathHelper.SnClientPath}'. Please make sure it's installed before using the tool.`);
+    if (!FileSystem.existsSync(initializer.PathHelper.SnClientPath)) {
+        throw Error(`sn-client-js package not available at '${initializer.PathHelper.SnClientPath}'. Please make sure it's installed before using the tool.`);
     }
 
-    if (!FileSystem.existsSync(Initializer.PathHelper.SnCliPath)) {
-        throw Error(`sn-client-cli package not available at '${Initializer.PathHelper.SnCliPath}'. Please make sure it's installed before using the tool.`);
+    if (!FileSystem.existsSync(initializer.PathHelper.SnCliPath)) {
+        throw Error(`sn-client-cli package not available at '${initializer.PathHelper.SnCliPath}'. Please make sure it's installed before using the tool.`);
     }
 
     const validCommands = [CMD_INIT, CMD_FETCH_TYPES, CMD_HELP];
@@ -38,7 +43,7 @@ const CMD_HELP = 'help';
                 name: op.FieldName
             };
         }));
-        Initializer.SnConfigReader.OverrideConfig(options);
+        initializer.SnConfigReader.OverrideConfig(options);
 
         switch (command) {
             case CMD_INIT:

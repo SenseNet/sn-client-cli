@@ -9,24 +9,24 @@ import { Download } from "./utils/download";
  */
 
 const SN_REPOSITORY_URL_POSTFIX = '/Root/System/Schema/Metadata/TypeScript/meta.zip';
-export async function DoFetchTypes() {
+export async function DoFetchTypes(initializer: Initializer = Initializer.Current) {
     try {
         console.log('Sn-Fetch-Types starting...');
         console.log('Checking sn.config.js...');
-        const cfg = await Initializer.SnConfigReader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
+        const cfg = await initializer.SnConfigReader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
         console.log('Downloading type definitions...');
         const zipBuffer = await new Download(cfg.RepositoryUrl, SN_REPOSITORY_URL_POSTFIX)
             .Authenticate(cfg.UserName, cfg.Password)
             .GetAsBufferAsync();
         const zip = AdmZip(zipBuffer);
         console.log('Download completed, extracting...');
-        zip.extractAllTo(Initializer.Stage.TempFolderPath + Path.sep + 'src', true);
+        zip.extractAllTo(initializer.Stage.TempFolderPath + Path.sep + 'src', true);
         console.log('Files extracted, running Build...');
 
-        await Initializer.Stage.CallGulpRunAsync('tsc', this.TempFolderPath);
-        await Initializer.Stage.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
-        await Initializer.Stage.UpdateModuleAsync();
-        await Initializer.Stage.Cleanup();
+        await initializer.Stage.CallGulpRunAsync('tsc', this.TempFolderPath);
+        await initializer.Stage.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
+        await initializer.Stage.UpdateModuleAsync();
+        await initializer.Stage.Cleanup();
 
         console.log('All done.');
     } catch (error) {

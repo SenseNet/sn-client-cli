@@ -16,19 +16,21 @@ gulp.task('clean', function () {
 
 gulp.task("typedoc", function () {
     return gulp
-        .src(["src/*.ts", "!src/SN.ts",'!./src/SN.d.ts'])
+        .src(["src/**/*.ts", "!src/**/index.ts"])
         .pipe(typedoc({
-                module: "commonjs",
-                target: "es2015",
-                includeDeclarations: false,
-                out: "./documentation",
-                name: "sn-client-js",
-                theme: "default",
-                ignoreCompilerErrors: true,
-                version: true,
-                readme: "sn-client-js/README.md",
-                excludeExternals: true,
-                excludePrivate: true,
-                includes: "docs"
-            }));
+            module: "commonjs",
+            target: "es2015",
+            mode: "file",
+            includeDeclarations: false,
+            experimentalDecorators: true,
+            out: "./documentation",
+            name: "sn-client-cli",
+            theme: "default",
+            ignoreCompilerErrors: true,
+            version: true,
+            readme: "./README.md",
+            excludeExternals: true,
+            excludePrivate: true,
+            includes: "docs"
+        }));
 });

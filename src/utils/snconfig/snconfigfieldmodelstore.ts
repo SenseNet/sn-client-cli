@@ -2,19 +2,19 @@ import { SnConfigBehavior } from './snconfigbehavior';
 import { SnConfigFieldModel } from './snconfigfieldmodel';
 
 /**
- * Class that stores the model data for the SnConfigModel's fields, filled by the SnConfigField decorator
+ * Class that stores the model data for the SnConfigModel's fields, it's values are, filled by the SnConfigField decorator.
  */
 export class SnConfigFieldModelStore {
 
     /**
-     * An array that contains the field definitions
+     * An array that contains the field definitions.
      */
     private static store: SnConfigFieldModel[] = [];
 
     /**
      * Adds a new model to the store
      * @param newModel {SnConfigFieldModel} The field model to be added
-     * @throws error {Error} if a field with the same name already exists
+     * @throws error if a field with the same name already exists
      */
     public static Add(newModel: SnConfigFieldModel) {
         if (this.Contains(newModel.FieldName)) {

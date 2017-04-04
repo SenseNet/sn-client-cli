@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * This type represents an SnConfig field behavior
+ * This enum represents an SnConfig field behavior. Values can be used as flags.
  */
 var SnConfigBehavior;
 (function (SnConfigBehavior) {

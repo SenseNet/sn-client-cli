@@ -1,5 +1,5 @@
 /**
- * This type represents an SnConfig field behavior
+ * This enum represents an SnConfig field behavior. Values can be used as flags.
  */
 export enum SnConfigBehavior {
 

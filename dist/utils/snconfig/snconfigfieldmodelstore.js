@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const snconfigbehavior_1 = require("./snconfigbehavior");
 /**
- * Class that stores the model data for the SnConfigModel's fields, filled by the SnConfigField decorator
+ * Class that stores the model data for the SnConfigModel's fields, it's values are, filled by the SnConfigField decorator.
  */
 class SnConfigFieldModelStore {
     /**
      * Adds a new model to the store
      * @param newModel {SnConfigFieldModel} The field model to be added
-     * @throws error {Error} if a field with the same name already exists
+     * @throws error if a field with the same name already exists
      */
     static Add(newModel) {
         if (this.Contains(newModel.FieldName)) {
@@ -51,7 +51,7 @@ class SnConfigFieldModelStore {
     }
 }
 /**
- * An array that contains the field definitions
+ * An array that contains the field definitions.
  */
 SnConfigFieldModelStore.store = [];
 exports.SnConfigFieldModelStore = SnConfigFieldModelStore;

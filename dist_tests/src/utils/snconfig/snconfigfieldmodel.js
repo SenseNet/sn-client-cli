@@ -7,7 +7,7 @@ const snconfigbehavior_1 = require("./snconfigbehavior");
 class SnConfigFieldModel {
     constructor() {
         /**
-         * The behavoir of the field
+         * The behavoir of the field, can be flagged
          * @default SnConfigBehavior.Default
          */
         this.Behavior = snconfigbehavior_1.SnConfigBehavior.Default;
