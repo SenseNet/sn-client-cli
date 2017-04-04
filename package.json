@@ -61,6 +61,9 @@
     "gulp-typedoc": "^2.0.2",
     "path": "^0.12.7"
   },
+  "peerDependencies": {
+    "sn-client-js": "^1.1.1-beta.1"
+  },
   "czConfig": {
     "path": "node_modules/cz-conventional-changelog"
   },
