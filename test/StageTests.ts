@@ -42,7 +42,7 @@ export class StageTests {
 
     @test('CallGulpAsync')
     public async CallGulpAsync() {
-        await this.stage.CallGulpRunAsync('@echo test', __dirname);
+        await this.stage.CallGulpRunAsync('', __dirname);
     }
 
     @test('CallGulpAsyncError')

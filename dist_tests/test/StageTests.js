@@ -45,7 +45,7 @@ let StageTests = class StageTests {
     }
     CallGulpAsync() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.stage.CallGulpRunAsync('@echo test', __dirname);
+            yield this.stage.CallGulpRunAsync('', __dirname);
         });
     }
     CallGulpAsyncError(done) {
