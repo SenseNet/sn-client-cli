@@ -1,4 +1,3 @@
-import * as Gulp from 'gulp';
 import * as Path from 'path';
 import { Initializer } from './initializer';
 

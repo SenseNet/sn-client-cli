@@ -1,6 +1,5 @@
 import * as Delete from 'del';
 import * as Gulp from 'gulp';
-import * as GulpMocha from 'gulp-mocha';
 import * as Promisify from 'gulp-promisify';
 import * as GulpRun from 'gulp-run';
 import { PathHelper } from './pathhelper';
@@ -71,7 +70,7 @@ export class Stage {
     }
 
     public async InitializeConfigAsync() {
-        const task = await Gulp.src([
+        await Gulp.src([
             './sn.config.js'
         ], {
                 base: this.paths.SnCliPath,

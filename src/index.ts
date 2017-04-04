@@ -32,7 +32,7 @@ const CMD_HELP = 'help';
     const validOptions = SnConfigFieldModelStore.GetCommandOptions();
 
     try {
-        const { command, argv } = CommandLineCommands(validCommands);
+        const { command } = CommandLineCommands(validCommands);
         const options: Partial<SnConfigModel> = CommadLineArgs(validOptions.map((op) => {
             return {
                 name: op.FieldName

@@ -1,6 +1,5 @@
 import * as Chai from 'chai';
 import { suite, test } from 'mocha-typescript';
-import { Download } from '../src/utils/download';
 import { SnConfigBehavior } from "../src/utils/snconfig/snconfigbehavior";
 import { SnConfigFieldModel } from "../src/utils/snconfig/snconfigfieldmodel";
 import { SnConfigFieldModelStore } from "../src/utils/snconfig/snconfigfieldmodelstore";

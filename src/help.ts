@@ -1,6 +1,5 @@
 import * as CommandLineUsage from 'command-line-usage';
 import { SnConfigFieldModel } from "./utils/snconfig/snconfigfieldmodel";
-import { SnConfigFieldModelStore } from './utils/snconfig/snconfigfieldmodelstore';
 
 export class Help {
 

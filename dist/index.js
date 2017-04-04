@@ -34,7 +34,7 @@ const CMD_HELP = 'help';
     const validCommands = [CMD_INIT, CMD_FETCH_TYPES, CMD_HELP];
     const validOptions = snconfigfieldmodelstore_1.SnConfigFieldModelStore.GetCommandOptions();
     try {
-        const { command, argv } = CommandLineCommands(validCommands);
+        const { command } = CommandLineCommands(validCommands);
         const options = CommadLineArgs(validOptions.map((op) => {
             return {
                 name: op.FieldName

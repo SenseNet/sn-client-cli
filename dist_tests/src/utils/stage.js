@@ -77,7 +77,7 @@ class Stage {
     }
     InitializeConfigAsync() {
         return __awaiter(this, void 0, void 0, function* () {
-            const task = yield Gulp.src([
+            yield Gulp.src([
                 './sn.config.js'
             ], {
                 base: this.paths.SnCliPath,

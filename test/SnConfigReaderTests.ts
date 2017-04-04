@@ -21,7 +21,7 @@ export class SnConfigReaderTests {
 
     @test('Should create a new config if not exists')
     public async ReadNonExisting() {
-        const cfg = await this.reader.ReadConfigFile('invalidConfig.js');
+        await this.reader.ReadConfigFile('invalidConfig.js');
         expect(this.reader.Config).to.be.instanceof(SnConfigModel);
     }
 

@@ -32,7 +32,7 @@ let SnConfigReaderTests = class SnConfigReaderTests {
     }
     ReadNonExisting() {
         return __awaiter(this, void 0, void 0, function* () {
-            const cfg = yield this.reader.ReadConfigFile('invalidConfig.js');
+            yield this.reader.ReadConfigFile('invalidConfig.js');
             expect(this.reader.Config).to.be.instanceof(snconfigmodel_1.SnConfigModel);
         });
     }
