@@ -35,8 +35,8 @@ let StageTests = class StageTests {
         const promise = this.stage.PrepareAsync();
         expect(promise).to.be.an.instanceOf(Promise);
     }
-    CompilePromise() {
-        const promise = this.stage.CompileAsync();
+    IniConfigPromise() {
+        const promise = this.stage.InitializeConfigAsync();
         expect(promise).to.be.an.instanceOf(Promise);
     }
     UpdatePromise() {
@@ -65,11 +65,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], StageTests.prototype, "PreparePromise", null);
 __decorate([
-    mocha_typescript_1.test('Compile Should return an awaitable promise'),
+    mocha_typescript_1.test('InitializeConfigAsync Should return an awaitable promise'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], StageTests.prototype, "CompilePromise", null);
+], StageTests.prototype, "IniConfigPromise", null);
 __decorate([
     mocha_typescript_1.test('UpdateModule Should return an awaitable promise'),
     __metadata("design:type", Function),

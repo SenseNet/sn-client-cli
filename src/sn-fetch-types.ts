@@ -22,7 +22,12 @@ export async function DoFetchTypes() {
         console.log('Download completed, extracting...');
         zip.extractAllTo(Initializer.Stage.TempFolderPath + Path.sep + 'src', true);
         console.log('Files extracted, running Build...');
-        await Initializer.Stage.CompileAsync();
+
+        await Initializer.Stage.CallGulpRunAsync('tsc', this.TempFolderPath);
+        await Initializer.Stage.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
+        await Initializer.Stage.UpdateModuleAsync();
+        await Initializer.Stage.Cleanup();
+
         console.log('All done.');
     } catch (error) {
         console.error('There was an error during fetching types.');

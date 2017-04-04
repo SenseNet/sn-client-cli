@@ -28,32 +28,33 @@ class Download {
         this.headers.Authorization = auth;
         return this;
     }
+    HandleResponse(response, resolve) {
+        const data = [];
+        const contentLength = parseInt(response.headers['content-length'], 0);
+        response.on('data', (chunk) => {
+            data.push(chunk);
+        });
+        response.on('end', () => {
+            let pos = 0;
+            const buffer = new Buffer(contentLength);
+            data.forEach((chunk) => {
+                chunk.copy(buffer, pos);
+                pos += chunk.length;
+            });
+            resolve(buffer);
+        });
+    }
     /**
      * Executes the download request, flatterns the data into a simple in-memory buffer
      * @returns {Promise<Buffer>} An awaitable promise with the in-memory buffer
      */
     GetAsBufferAsync() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             Http.get({
                 headers: this.headers,
                 host: this.host,
                 path: this.path,
-            }, (response) => {
-                const data = [];
-                const contentLength = parseInt(response.headers['content-length'], 0);
-                response.on('data', (chunk) => {
-                    data.push(chunk);
-                });
-                response.on('end', () => {
-                    let pos = 0;
-                    const buffer = new Buffer(contentLength);
-                    data.forEach((chunk) => {
-                        chunk.copy(buffer, pos);
-                        pos += chunk.length;
-                    });
-                    resolve(buffer);
-                });
-            });
+            }, (response) => this.HandleResponse(response, resolve));
         });
     }
 }

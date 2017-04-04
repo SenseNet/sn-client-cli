@@ -75,18 +75,6 @@ class Stage {
             yield task.resume();
         });
     }
-    /**
-     * Compiles the artifacts in the specified temp folder and runs the unit tests
-     * @throws {Error} if the build or the test has been failed
-     */
-    CompileAsync() {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.CallGulpRunAsync('tsc', this.TempFolderPath);
-            yield this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
-            yield this.UpdateModuleAsync();
-            yield this.Cleanup();
-        });
-    }
     InitializeConfigAsync() {
         return __awaiter(this, void 0, void 0, function* () {
             const task = yield Gulp.src([

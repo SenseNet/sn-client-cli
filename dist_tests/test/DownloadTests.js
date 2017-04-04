@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Chai = require("chai");
+const Events = require("events");
 const mocha_typescript_1 = require("mocha-typescript");
 const download_1 = require("../src/utils/download");
 const expect = Chai.expect;
@@ -27,6 +28,20 @@ let DownloadTests = class DownloadTests {
     GetAsBufferAsync() {
         const buffer = this.download.GetAsBufferAsync();
         expect(buffer).to.be.an.instanceOf(Promise);
+    }
+    testHandleResponse(done) {
+        const httpMsg = new Events.EventEmitter();
+        httpMsg.headers = {
+            'content-length': 3
+        };
+        const resolve = (bf) => {
+            expect(bf.toString()).to.be.eq('aaa');
+            done();
+        };
+        this.download.HandleResponse(httpMsg, resolve.bind(this));
+        const buf = Buffer.from('aaa');
+        httpMsg.emit('data', buf);
+        httpMsg.emit('end');
     }
 };
 __decorate([
@@ -47,6 +62,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], DownloadTests.prototype, "GetAsBufferAsync", null);
+__decorate([
+    mocha_typescript_1.test('HandleResponse'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], DownloadTests.prototype, "testHandleResponse", null);
 DownloadTests = __decorate([
     mocha_typescript_1.suite('Download tests')
 ], DownloadTests);

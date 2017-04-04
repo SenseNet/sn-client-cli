@@ -31,7 +31,10 @@ function DoFetchTypes() {
             console.log('Download completed, extracting...');
             zip.extractAllTo(initializer_1.Initializer.Stage.TempFolderPath + Path.sep + 'src', true);
             console.log('Files extracted, running Build...');
-            yield initializer_1.Initializer.Stage.CompileAsync();
+            yield initializer_1.Initializer.Stage.CallGulpRunAsync('tsc', this.TempFolderPath);
+            yield initializer_1.Initializer.Stage.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
+            yield initializer_1.Initializer.Stage.UpdateModuleAsync();
+            yield initializer_1.Initializer.Stage.Cleanup();
             console.log('All done.');
         }
         catch (error) {

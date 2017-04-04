@@ -70,17 +70,6 @@ export class Stage {
         await task.resume();
     }
 
-    /**
-     * Compiles the artifacts in the specified temp folder and runs the unit tests
-     * @throws {Error} if the build or the test has been failed
-     */
-    public async CompileAsync() {
-        await this.CallGulpRunAsync('tsc', this.TempFolderPath);
-        await this.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', this.TempFolderPath);
-        await this.UpdateModuleAsync();
-        await this.Cleanup();
-    }
-
     public async InitializeConfigAsync() {
         const task = await Gulp.src([
             './sn.config.js'

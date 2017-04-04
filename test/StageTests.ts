@@ -28,9 +28,9 @@ export class StageTests {
         expect(promise).to.be.an.instanceOf(Promise);
     }
 
-    @test('Compile Should return an awaitable promise')
-    public CompilePromise() {
-        const promise = this.stage.CompileAsync();
+    @test('InitializeConfigAsync Should return an awaitable promise')
+    public IniConfigPromise() {
+        const promise = this.stage.InitializeConfigAsync();
         expect(promise).to.be.an.instanceOf(Promise);
     }
 

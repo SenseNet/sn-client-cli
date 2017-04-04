@@ -1,4 +1,6 @@
 import * as Chai from 'chai';
+import * as Events from 'events';
+import * as Http from 'http';
 import { suite, test } from 'mocha-typescript';
 import { Download } from '../src/utils/download';
 
@@ -28,5 +30,21 @@ export class DownloadTests {
     public GetAsBufferAsync() {
         const buffer = this.download.GetAsBufferAsync();
         expect(buffer).to.be.an.instanceOf(Promise);
+    }
+
+    @test('HandleResponse')
+    public testHandleResponse(done) {
+        const httpMsg: Http.IncomingMessage = new Events.EventEmitter() as Http.IncomingMessage;
+        httpMsg.headers = {
+            'content-length': 3
+        };
+        const resolve = (bf: Buffer) => {
+            expect(bf.toString()).to.be.eq('aaa');
+            done();
+        };
+        this.download.HandleResponse(httpMsg, resolve.bind(this));
+        const buf = Buffer.from('aaa');
+        httpMsg.emit('data', buf);
+        httpMsg.emit('end');
     }
 }

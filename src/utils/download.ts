@@ -29,33 +29,35 @@ export class Download {
         return this;
     }
 
+    public HandleResponse(response: Http.IncomingMessage, resolve: (Buffer) => void) {
+        const data = [];
+        const contentLength: number = parseInt(response.headers['content-length'], 0);
+        response.on('data', (chunk) => {
+            data.push(chunk);
+        });
+
+        response.on('end', () => {
+            let pos = 0;
+            const buffer = new Buffer(contentLength);
+            data.forEach((chunk) => {
+                chunk.copy(buffer, pos);
+                pos += chunk.length;
+            });
+            resolve(buffer);
+        });
+    }
+
     /**
      * Executes the download request, flatterns the data into a simple in-memory buffer
      * @returns {Promise<Buffer>} An awaitable promise with the in-memory buffer
      */
     public GetAsBufferAsync(): Promise<Buffer> {
-        return new Promise<Buffer>((resolve, reject) => {
+        return new Promise<Buffer>((resolve) => {
             Http.get({
                 headers: this.headers,
                 host: this.host,
                 path: this.path,
-            }, (response: Http.IncomingMessage) => {
-                const data = [];
-                const contentLength: number = parseInt(response.headers['content-length'], 0);
-                response.on('data', (chunk) => {
-                    data.push(chunk);
-                });
-
-                response.on('end', () => {
-                    let pos = 0;
-                    const buffer = new Buffer(contentLength);
-                    data.forEach((chunk) => {
-                        chunk.copy(buffer, pos);
-                        pos += chunk.length;
-                    });
-                    resolve(buffer);
-                });
-            });
+            }, (response: Http.IncomingMessage) => this.HandleResponse(response, resolve));
         });
     }
 }
