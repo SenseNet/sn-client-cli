@@ -19,11 +19,20 @@ let AskTests = class AskTests {
         const promise = ask_1.Ask.TextAsync('Text');
         expect(promise).to.be.instanceOf(Promise, 'Should return a promise');
     }
-    TextStdIn(done) {
+    TextOverride(done) {
         Prompt.override = {
             Text: 'alma'
         };
         ask_1.Ask.TextAsync('Text').then((result) => {
+            expect(result).to.be.eq('alma');
+            done();
+        });
+    }
+    PasswordOverride(done) {
+        Prompt.override = {
+            Text: 'alma'
+        };
+        ask_1.Ask.PasswordAsync('Text').then((result) => {
             expect(result).to.be.eq('alma');
             done();
         });
@@ -48,11 +57,17 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AskTests.prototype, "TextAsync", null);
 __decorate([
-    mocha_typescript_1.test('resolve with std in'),
+    mocha_typescript_1.test('Ask text, resolve with override'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], AskTests.prototype, "TextStdIn", null);
+], AskTests.prototype, "TextOverride", null);
+__decorate([
+    mocha_typescript_1.test('Ask password, resolve with override'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AskTests.prototype, "PasswordOverride", null);
 __decorate([
     mocha_typescript_1.test('should return an awaitable Promise'),
     __metadata("design:type", Function),

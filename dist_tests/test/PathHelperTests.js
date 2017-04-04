@@ -16,7 +16,7 @@ const pathhelper_1 = require("../src/utils/pathhelper");
 const expect = Chai.expect;
 let PathHelperTests = class PathHelperTests {
     before() {
-        this.PathHelper = new pathhelper_1.PathHelper('c:/temp/package/../package', 'c:/temp/package/../package/node_modules/sn-client-js');
+        this.PathHelper = new pathhelper_1.PathHelper('c:/temp/package/../package', 'c:/temp/package/../package/node_modules/sn-client-js', 'c:/temp/package/../package/node_modules/sn-client-cli');
     }
     PackageRootPath() {
         expect(this.PathHelper.PackageRootPath).to.be.eq(`c:${Path.sep}temp${Path.sep}package`);

@@ -25,7 +25,7 @@ const stage_1 = require("../src/utils/stage");
 const expect = Chai.expect;
 let StageTests = class StageTests {
     before() {
-        this.pathHelper = new pathhelper_1.PathHelper(process.cwd(), `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`);
+        this.pathHelper = new pathhelper_1.PathHelper(process.cwd(), `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`, `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-cli`);
         this.stage = new stage_1.Stage(this.pathHelper);
     }
     TempFolderPath() {

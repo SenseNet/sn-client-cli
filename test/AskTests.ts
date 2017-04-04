@@ -14,12 +14,23 @@ export class AskTests {
         expect(promise).to.be.instanceOf(Promise, 'Should return a promise');
     }
 
-    @test('resolve with std in')
-    public TextStdIn(done) {
+    @test('Ask text, resolve with override')
+    public TextOverride(done) {
         Prompt.override = {
             Text: 'alma'
         };
         Ask.TextAsync('Text').then((result) => {
+            expect(result).to.be.eq('alma');
+            done();
+        });
+    }
+
+    @test('Ask password, resolve with override')
+    public PasswordOverride(done) {
+        Prompt.override = {
+            Text: 'alma'
+        };
+        Ask.PasswordAsync('Text').then((result) => {
             expect(result).to.be.eq('alma');
             done();
         });

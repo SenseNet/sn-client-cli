@@ -19,20 +19,25 @@ const download_1 = require("./utils/download");
 const SN_REPOSITORY_URL_POSTFIX = '/Root/System/Schema/Metadata/TypeScript/meta.zip';
 function DoFetchTypes() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('Sn-Fetch-Types starting...');
-        console.log('Checking sn.config.js...');
-        const cfg = yield initializer_1.Initializer.SnConfigReader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
-        console.log('Downloading type definitions...');
-        const zipBuffer = yield new download_1.Download(cfg.RepositoryUrl, SN_REPOSITORY_URL_POSTFIX)
-            .Authenticate(cfg.UserName, cfg.Password)
-            .GetAsBufferAsync();
-        const zip = AdmZip(zipBuffer);
-        console.log('Download completed, extracting...');
-        zip.extractAllTo(initializer_1.Initializer.Stage.TempFolderPath + Path.sep + 'src', true);
-        console.log('Files extracted, running Build...');
-        yield initializer_1.Initializer.Stage.CompileAsync();
-        console.log('All done.');
-        process.exit(0);
+        try {
+            console.log('Sn-Fetch-Types starting...');
+            console.log('Checking sn.config.js...');
+            const cfg = yield initializer_1.Initializer.SnConfigReader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
+            console.log('Downloading type definitions...');
+            const zipBuffer = yield new download_1.Download(cfg.RepositoryUrl, SN_REPOSITORY_URL_POSTFIX)
+                .Authenticate(cfg.UserName, cfg.Password)
+                .GetAsBufferAsync();
+            const zip = AdmZip(zipBuffer);
+            console.log('Download completed, extracting...');
+            zip.extractAllTo(initializer_1.Initializer.Stage.TempFolderPath + Path.sep + 'src', true);
+            console.log('Files extracted, running Build...');
+            yield initializer_1.Initializer.Stage.CompileAsync();
+            console.log('All done.');
+        }
+        catch (error) {
+            console.error('There was an error during fetching types.');
+            console.error(error);
+        }
     });
 }
 exports.DoFetchTypes = DoFetchTypes;

@@ -31,11 +31,11 @@ class SnConfigReader {
      * @returns {Promise<any>} An awaitable promise that will be resolved when the
      * reading is completed or the new Config model is constructed.
      */
-    ReadConfigFile() {
+    ReadConfigFile(fileName = SN_CONFIG_NAME) {
         return __awaiter(this, void 0, void 0, function* () {
             let cfg;
             try {
-                cfg = require(this.projectDirectory + Path.sep + SN_CONFIG_NAME);
+                cfg = require(this.projectDirectory + Path.sep + fileName);
             }
             catch (error) {
                 console.log(`No '${SN_CONFIG_NAME}' file found in the project root.`);

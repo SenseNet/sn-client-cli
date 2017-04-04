@@ -81,6 +81,17 @@ export class Stage {
         await this.Cleanup();
     }
 
+    public async InitializeConfigAsync() {
+        const task = await Gulp.src([
+            './sn.config.js'
+        ], {
+                base: this.paths.SnCliPath,
+                cwd: this.paths.SnCliPath
+            })
+            .pipe(Gulp.dest(this.paths.PackageRootPath))
+            .resume();
+    }
+
     public async CallGulpRunAsync(command: string, workingDir: string): Promise<any> {
         return new Promise((resolve, reject) => {
             GulpRun(command, {

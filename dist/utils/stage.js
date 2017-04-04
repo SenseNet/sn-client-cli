@@ -87,6 +87,18 @@ class Stage {
             yield this.Cleanup();
         });
     }
+    InitializeConfigAsync() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const task = yield Gulp.src([
+                './sn.config.js'
+            ], {
+                base: this.paths.SnCliPath,
+                cwd: this.paths.SnCliPath
+            })
+                .pipe(Gulp.dest(this.paths.PackageRootPath))
+                .resume();
+        });
+    }
     CallGulpRunAsync(command, workingDir) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => {

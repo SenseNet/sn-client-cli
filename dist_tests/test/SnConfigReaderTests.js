@@ -19,6 +19,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const Chai = require("chai");
 const mocha_typescript_1 = require("mocha-typescript");
+const snconfigmodel_1 = require("../src/utils/snconfig/snconfigmodel");
 const snconfigreader_1 = require("../src/utils/snconfig/snconfigreader");
 const expect = Chai.expect;
 let SnConfigReaderTests = class SnConfigReaderTests {
@@ -28,6 +29,12 @@ let SnConfigReaderTests = class SnConfigReaderTests {
     Read() {
         const promise = this.reader.ReadConfigFile();
         expect(promise).to.be.an.instanceOf(Promise);
+    }
+    ReadNonExisting() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const cfg = yield this.reader.ReadConfigFile('invalidConfig.js');
+            expect(this.reader.Config).to.be.instanceof(snconfigmodel_1.SnConfigModel);
+        });
     }
     ValidatePromise() {
         const promise = this.reader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
@@ -75,6 +82,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], SnConfigReaderTests.prototype, "Read", null);
+__decorate([
+    mocha_typescript_1.test('Should create a new config if not exists'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], SnConfigReaderTests.prototype, "ReadNonExisting", null);
 __decorate([
     mocha_typescript_1.test('ValidateAsync should return an awaitable promise'),
     __metadata("design:type", Function),

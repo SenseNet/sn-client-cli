@@ -24,7 +24,7 @@ class Initializer {
     }
     static Init() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.pathHelper = new pathhelper_1.PathHelper(process.cwd(), `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`);
+            this.pathHelper = new pathhelper_1.PathHelper(process.cwd(), `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`, `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-cli`);
             this.stage = new stage_1.Stage(this.pathHelper);
             yield this.stage.PrepareAsync();
             this.configReader = new snconfigreader_1.SnConfigReader(this.pathHelper.PackageRootPath);

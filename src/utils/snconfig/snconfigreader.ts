@@ -24,10 +24,10 @@ export class SnConfigReader {
      * @returns {Promise<any>} An awaitable promise that will be resolved when the
      * reading is completed or the new Config model is constructed.
      */
-    public async ReadConfigFile(): Promise<any> {
+    public async ReadConfigFile(fileName: string = SN_CONFIG_NAME): Promise<any> {
         let cfg: SnConfigModel;
         try {
-            cfg = require(this.projectDirectory + Path.sep + SN_CONFIG_NAME);
+            cfg = require(this.projectDirectory + Path.sep + fileName);
         } catch (error) {
             console.log(`No '${SN_CONFIG_NAME}' file found in the project root.`);
             cfg = new SnConfigModel();

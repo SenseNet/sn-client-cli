@@ -1,6 +1,9 @@
 import * as CommadLineArgs from 'command-line-args';
 import * as CommandLineCommands from 'command-line-commands';
+import * as FileSystem from 'fs';
+import * as Path from 'path';
 import { Help } from './help';
+import { DoInitializeConfigs } from './initialize-config';
 import { Initializer } from './initializer';
 import { DoFetchTypes } from './sn-fetch-types';
 import { SnConfigFieldModelStore } from './utils/snconfig/snconfigfieldmodelstore';
@@ -12,6 +15,19 @@ const CMD_HELP = 'help';
 
 (async () => {
     await Initializer.Init();
+
+    if (!FileSystem.existsSync(Path.join(Initializer.PathHelper.PackageRootPath, 'package.json'))) {
+        throw Error('There is no package.json file in your working directory. Please run the tool from a root of a valid NPM package!');
+    }
+
+    if (!FileSystem.existsSync(Initializer.PathHelper.SnClientPath)) {
+        throw Error(`sn-client-js package not available at '${Initializer.PathHelper.SnClientPath}'. Please make sure it's installed before using the tool.`);
+    }
+
+    if (!FileSystem.existsSync(Initializer.PathHelper.SnCliPath)) {
+        throw Error(`sn-client-cli package not available at '${Initializer.PathHelper.SnCliPath}'. Please make sure it's installed before using the tool.`);
+    }
+
     const validCommands = [CMD_INIT, CMD_FETCH_TYPES, CMD_HELP];
     const validOptions = SnConfigFieldModelStore.GetCommandOptions();
 
@@ -26,10 +42,10 @@ const CMD_HELP = 'help';
 
         switch (command) {
             case CMD_INIT:
-                console.error('Not implemented yet! :(');
+                await DoInitializeConfigs();
                 break;
             case CMD_FETCH_TYPES:
-                DoFetchTypes();
+                await DoFetchTypes();
                 break;
             case CMD_HELP:
                 Help.Show(validOptions);
@@ -41,5 +57,7 @@ const CMD_HELP = 'help';
         Help.Show(validOptions);
         process.exit(0);
     }
+
+    process.exit(0);
 
 })();

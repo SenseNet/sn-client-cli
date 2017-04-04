@@ -21,7 +21,10 @@ export class Initializer {
     }
 
     public static async Init() {
-        this.pathHelper = new PathHelper(process.cwd(), `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`);
+        this.pathHelper = new PathHelper(
+            process.cwd(),
+            `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-js`,
+            `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-cli`);
         this.stage = new Stage(this.pathHelper);
         await this.stage.PrepareAsync();
         this.configReader = new SnConfigReader(this.pathHelper.PackageRootPath);

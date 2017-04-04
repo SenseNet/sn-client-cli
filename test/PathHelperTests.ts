@@ -10,7 +10,7 @@ export class PathHelperTests {
 
     private PathHelper: PathHelper;
     public before() {
-        this.PathHelper = new PathHelper('c:/temp/package/../package', 'c:/temp/package/../package/node_modules/sn-client-js');
+        this.PathHelper = new PathHelper('c:/temp/package/../package', 'c:/temp/package/../package/node_modules/sn-client-js', 'c:/temp/package/../package/node_modules/sn-client-cli');
     }
 
     @test('Should normalize PackageRoot path')

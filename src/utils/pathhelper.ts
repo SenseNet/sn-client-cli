@@ -8,14 +8,14 @@ export class PathHelper {
     /**
      * @param PackageRootPath {string} The absolute path for the current client package directory (e.g.: c:/temp/my-package)
      * @param SnClientPath {string} The absolute path for the sn-client-js package directory (e.g.: c:/temp/my-package/node_modules/sn-client-js)
+     * @param SnCliPath {string} The absolute path for the sn-client-cli package directory (e.g.: c:/temp/my-package/node_modules/sn-client-cli)s
      * @constructs PathHelper
      */
-    constructor(public readonly PackageRootPath: string, public readonly  SnClientPath: string) {
+    constructor(public readonly PackageRootPath: string, public readonly SnClientPath: string, public readonly SnCliPath) {
         this.PackageRootPath = Path.normalize(this.PackageRootPath);
         this.SnClientPath = Path.normalize(this.SnClientPath);
-        console.log(`Sn Client package path: ${this.SnClientPath}`);
-        console.log(`Package root path: ${this.PackageRootPath}`);
-     }
+        this.SnCliPath = Path.normalize(this.SnCliPath);
+    }
 
     /**
      * Returns an absolute path based on a provided relative (from the package root) one
