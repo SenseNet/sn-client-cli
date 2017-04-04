@@ -1,5 +1,5 @@
 # sn-client-cli
-This package is a command line tool for the Sense/NET Platform.
+This package is a command line tool for the Sense/NET Platform's [Client Library](https://github.com/SenseNet/sn-client-js "sn-client-js").
 
 ## Note
 This package is under development and not released yet.
