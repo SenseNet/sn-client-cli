@@ -1,5 +1,6 @@
 # sn-client-cli
 
+[![Gitter chat](https://img.shields.io/gitter/room/SenseNet/SN7ClientAPI.svg?style=flat)](https://gitter.im/SenseNet/SN7ClientAPI)
 [![Build Status](https://travis-ci.org/SenseNet/sn-client-cli.svg?branch=master)](https://travis-ci.org/SenseNet/sn-client-cli)
 
 This package is a command line tool for the Sense/NET Platform's [Client Library](https://github.com/SenseNet/sn-client-js "sn-client-js").
