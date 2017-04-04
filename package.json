@@ -66,5 +66,9 @@
   },
   "nyc": {
     "exclude": "dist_tests/test/**/*.*"
+  },
+  "engines": {
+    "npm": "^4.1.2",
+    "node": "^6.1.0"
   }
 }
