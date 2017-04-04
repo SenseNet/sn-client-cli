@@ -8,7 +8,7 @@ node_js:
   - '7'
   - '6'
 before_script:
-  - npm install -g gulp
+  - npm install -g gulp nyc
 script: 
   - npm run build && npm run test
 after_success:
