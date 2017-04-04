@@ -59,9 +59,7 @@
     "gulp-promisify": "^1.2.2",
     "gulp-run": "^1.7.1",
     "gulp-typedoc": "^2.0.2",
-    "path": "^0.12.7"
-  },
-  "peerDependencies": {
+    "path": "^0.12.7",
     "sn-client-js": "^1.1.1-beta.1"
   },
   "czConfig": {
