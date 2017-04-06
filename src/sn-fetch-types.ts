@@ -7,10 +7,10 @@ import { Download } from "./utils/download";
  * Executeable node.js file for fetching / updating pre-generated
  *  Typescript proxy classes from a Sense/Net Content Repository
  */
-
-const SN_REPOSITORY_URL_POSTFIX = '/Root/System/Schema/Metadata/TypeScript/meta.zip';
 export async function DoFetchTypes(initializer: Initializer = Initializer.Current) {
     try {
+        const SN_REPOSITORY_URL_POSTFIX = '/Root/System/Schema/Metadata/TypeScript/meta.zip';
+
         console.log('Sn-Fetch-Types starting...');
         console.log('Checking sn.config.js...');
         const cfg = await initializer.SnConfigReader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');

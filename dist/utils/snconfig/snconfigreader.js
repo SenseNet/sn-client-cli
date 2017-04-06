@@ -13,7 +13,6 @@ const ask_1 = require("../ask");
 const snconfigbehavior_1 = require("./snconfigbehavior");
 const snconfigfieldmodelstore_1 = require("./snconfigfieldmodelstore");
 const snconfigmodel_1 = require("./snconfigmodel");
-const SN_CONFIG_NAME = 'sn.config.js';
 /**
  * This class reads, verifies and extends a configuration file from the specified project directory.
  */
@@ -24,6 +23,7 @@ class SnConfigReader {
      */
     constructor(projectDirectory) {
         this.projectDirectory = projectDirectory;
+        this.SN_CONFIG_NAME = 'sn.config.js';
         this.Config = new snconfigmodel_1.SnConfigModel();
     }
     /**
@@ -31,14 +31,14 @@ class SnConfigReader {
      * @returns {Promise<any>} An awaitable promise that will be resolved when the
      * reading is completed or the new Config model is constructed.
      */
-    ReadConfigFile(fileName = SN_CONFIG_NAME) {
+    ReadConfigFile(fileName = this.SN_CONFIG_NAME) {
         return __awaiter(this, void 0, void 0, function* () {
             let cfg;
             try {
                 cfg = require(this.projectDirectory + Path.sep + fileName);
             }
             catch (error) {
-                console.log(`No '${SN_CONFIG_NAME}' file found in the project root.`);
+                console.log(`No '${this.SN_CONFIG_NAME}' file found in the project root.`);
                 cfg = new snconfigmodel_1.SnConfigModel();
             }
             this.Config = cfg;

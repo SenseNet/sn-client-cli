@@ -12,11 +12,12 @@ import { SnConfigModel } from "./utils/snconfig/snconfigmodel";
 /**
  * Entry point for the 'sn-client' command
  */
-const CMD_INIT = 'init';
-const CMD_FETCH_TYPES = 'fetch-types';
-const CMD_HELP = 'help';
+const Start = async () => {
 
-(async () => {
+    const CMD_INIT = 'init';
+    const CMD_FETCH_TYPES = 'fetch-types';
+    const CMD_HELP = 'help';
+
     await Initializer.Current.Init();
 
     const initializer = Initializer.Current;
@@ -65,4 +66,6 @@ const CMD_HELP = 'help';
 
     process.exit(0);
 
-})();
+};
+
+Start();
