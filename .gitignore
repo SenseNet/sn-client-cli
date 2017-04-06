@@ -39,5 +39,9 @@ jspm_packages
 # Sense/NET temp folder for stage
 tmp
 
+# Test compiled files
+dist_tests
+
 # TypeDoc documentation
 documentation
+
