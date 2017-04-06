@@ -1,4 +1,5 @@
 import * as Delete from 'del';
+import * as FileSystem from 'fs-extra';
 import * as Gulp from 'gulp';
 import * as Promisify from 'gulp-promisify';
 import * as GulpRun from 'gulp-run';
@@ -70,14 +71,14 @@ export class Stage {
     }
 
     public async InitializeConfigAsync() {
-        await Gulp.src([
-            './sn.config.js'
-        ], {
-                base: this.paths.SnCliPath,
-                cwd: this.paths.SnCliPath
-            })
-            .pipe(Gulp.dest(this.paths.PackageRootPath))
-            .resume();
+        const filename = 'sn.config.js';
+        return new Promise((resolve, reject) => {
+            FileSystem.copy(this.paths.GetRelativeToSnCliPath(filename), this.paths.GetRelativeToPackageRootPath(filename), (err) => {
+                if (err) {
+                    reject(err);
+                } else { resolve(); }
+            });
+        });
     }
 
     public async CallGulpRunAsync(command: string, workingDir: string): Promise<any> {

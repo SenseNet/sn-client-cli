@@ -15,7 +15,7 @@ const initializer_1 = require("./initializer");
  */
 function DoInitializeConfigs(initializer = initializer_1.Initializer.Current) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('Copying default config...');
+        console.log(`Copying default config from ${initializer.PathHelper.SnCliPath}${Path.sep}sn.config.js...`);
         try {
             yield initializer.Stage.InitializeConfigAsync();
             console.log(`Copied to ${initializer.PathHelper.PackageRootPath}${Path.sep}sn.config.js`);
