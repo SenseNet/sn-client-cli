@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Delete = require("del");
+const FileSystem = require("fs-extra");
 const Gulp = require("gulp");
 const Promisify = require("gulp-promisify");
 const GulpRun = require("gulp-run");
@@ -77,14 +78,17 @@ class Stage {
     }
     InitializeConfigAsync() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield Gulp.src([
-                './sn.config.js'
-            ], {
-                base: this.paths.SnCliPath,
-                cwd: this.paths.SnCliPath
-            })
-                .pipe(Gulp.dest(this.paths.PackageRootPath))
-                .resume();
+            const filename = 'sn.config.js';
+            return new Promise((resolve, reject) => {
+                FileSystem.copy(this.paths.GetRelativeToSnCliPath(filename), this.paths.GetRelativeToPackageRootPath(filename), (err) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve();
+                    }
+                });
+            });
         });
     }
     CallGulpRunAsync(command, workingDir) {

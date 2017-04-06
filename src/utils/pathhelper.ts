@@ -29,9 +29,18 @@ export class PathHelper {
     /**
      * Returns an absolute path based on a provided relative (from the sn-client-js root) one
      * @param relativePath {string} A relative path to the package root e.g. './my-dir'
-     * @returns the absolute path (e.g.: c:/temp/my-package/node_modules/my-dir)
+     * @returns the absolute path (e.g.: c:/temp/my-package/node_modules/sn-client-js/my-dir)
      */
     public GetRelativeToSnClientPath(relativePath: string): string {
         return Path.join(this.SnClientPath, relativePath);
+    }
+
+    /**
+     * Returns an absolute path based on a provided relative (from the sn-client-cli root) one
+     * @param relativePath {string} A relative path to the Sn CLI root e.g. './my-dir'
+     * @returns the absolute path (e.g.: c:/temp/my-package/node_modulessn-client-cli/my-dir)
+     */
+    public GetRelativeToSnCliPath(relativePath: string) {
+        return Path.join(this.SnCliPath, relativePath);
     }
 }
