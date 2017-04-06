@@ -16,7 +16,9 @@ gulp.task('clean', function () {
 
 gulp.task("typedoc", function () {
     return gulp
-        .src(["src/**/*.ts", "!src/**/index.ts"])
+        .src(["src/**/*.ts",
+            // "!src/**/index.ts"
+        ])
         .pipe(typedoc({
             module: "commonjs",
             target: "es2015",

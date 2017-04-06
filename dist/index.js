@@ -20,10 +20,10 @@ const snconfigfieldmodelstore_1 = require("./utils/snconfig/snconfigfieldmodelst
 /**
  * Entry point for the 'sn-client' command
  */
-const CMD_INIT = 'init';
-const CMD_FETCH_TYPES = 'fetch-types';
-const CMD_HELP = 'help';
-(() => __awaiter(this, void 0, void 0, function* () {
+const Start = () => __awaiter(this, void 0, void 0, function* () {
+    const CMD_INIT = 'init';
+    const CMD_FETCH_TYPES = 'fetch-types';
+    const CMD_HELP = 'help';
     yield initializer_1.Initializer.Current.Init();
     const initializer = initializer_1.Initializer.Current;
     if (!FileSystem.existsSync(Path.join(initializer.PathHelper.PackageRootPath, 'package.json'))) {
@@ -63,5 +63,6 @@ const CMD_HELP = 'help';
         process.exit(0);
     }
     process.exit(0);
-}))();
+});
+Start();
 //# sourceMappingURL=index.js.map
