@@ -7,8 +7,6 @@ import { PathHelper } from './pathhelper';
 
 import * as Path from 'path';
 
-const TEMP_FOLDER_NAME = 'tmp';
-
 /**
  * This class is used to handle the new incoming types from the repository in a transactional way.
  * Usage:
@@ -20,6 +18,8 @@ const TEMP_FOLDER_NAME = 'tmp';
  *  - clean up the temporary environment
  */
 export class Stage {
+
+    private readonly TEMP_FOLDER_NAME: string = 'tmp';
 
     /**
      * @param paths {PathHelper} Contextual path options
@@ -33,7 +33,7 @@ export class Stage {
      * @returns The absolute path of the Temporary folder
      */
     public get TempFolderPath(): string {
-        return `${this.paths.SnClientPath}${Path.sep}${TEMP_FOLDER_NAME}`;
+        return `${this.paths.SnClientPath}${Path.sep}${this.TEMP_FOLDER_NAME}`;
     }
 
     /**

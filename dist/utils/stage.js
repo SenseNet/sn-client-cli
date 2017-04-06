@@ -14,7 +14,6 @@ const Gulp = require("gulp");
 const Promisify = require("gulp-promisify");
 const GulpRun = require("gulp-run");
 const Path = require("path");
-const TEMP_FOLDER_NAME = 'tmp';
 /**
  * This class is used to handle the new incoming types from the repository in a transactional way.
  * Usage:
@@ -32,13 +31,14 @@ class Stage {
      */
     constructor(paths) {
         this.paths = paths;
+        this.TEMP_FOLDER_NAME = 'tmp';
         Promisify(Gulp);
     }
     /**
      * @returns The absolute path of the Temporary folder
      */
     get TempFolderPath() {
-        return `${this.paths.SnClientPath}${Path.sep}${TEMP_FOLDER_NAME}`;
+        return `${this.paths.SnClientPath}${Path.sep}${this.TEMP_FOLDER_NAME}`;
     }
     /**
      * Prepare the specified temporary folder
