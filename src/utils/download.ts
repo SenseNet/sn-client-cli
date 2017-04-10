@@ -51,7 +51,7 @@ export class Download {
      * Executes the download request, flatterns the data into a simple in-memory buffer
      * @returns {Promise<Buffer>} An awaitable promise with the in-memory buffer
      */
-    public GetAsBufferAsync(): Promise<Buffer> {
+    public async GetAsBufferAsync(): Promise<Buffer> {
         return new Promise<Buffer>((resolve) => {
             Http.get({
                 headers: this.headers,

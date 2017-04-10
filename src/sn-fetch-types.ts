@@ -26,7 +26,7 @@ export async function DoFetchTypes(initializer: Initializer = Initializer.Curren
         await initializer.Stage.CallGulpRunAsync('tsc', initializer.Stage.TempFolderPath);
         await initializer.Stage.CallGulpRunAsync('nyc mocha -p tsconfig.json dist/test/index.js', initializer.Stage.TempFolderPath);
         await initializer.Stage.UpdateModuleAsync();
-        await initializer.Stage.Cleanup();
+        await initializer.Stage.CleanupAsync();
 
         console.log('All done.');
     } catch (error) {

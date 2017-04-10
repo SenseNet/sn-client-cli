@@ -42,7 +42,7 @@ export class Stage {
      * - Copies the existing Typescript source files and testss
      */
     public async PrepareAsync() {
-        this.Cleanup();
+        await this.CleanupAsync();
         const task = Gulp.src([
             `./src/**/*.ts`,
             `./test/**/*.ts`,
@@ -67,7 +67,7 @@ export class Stage {
                 cwd: this.TempFolderPath,
             })
             .pipe(Gulp.dest(this.paths.SnClientPath));
-        await task.resume();
+        return await task.resume();
     }
 
     public async InitializeConfigAsync() {
@@ -99,7 +99,14 @@ export class Stage {
     /**
      * Cleans up (deletes) the specified temporary folder
      */
-    public Cleanup() {
-        Delete.sync(this.TempFolderPath, { force: true });
+    public async CleanupAsync() {
+        return new Promise((resolve, reject) => {
+            try {
+                Delete.sync(this.TempFolderPath, { force: true });
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 }

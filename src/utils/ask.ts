@@ -62,7 +62,9 @@ export class Ask {
     public static async MissingConfigs<K extends keyof SnConfigModel>(...missingConfigs: K[]): Promise<Partial<SnConfigModel>> {
         return new Promise<Partial<SnConfigModel>>((resolve, reject) => {
             Prompt.start();
-            const configs = missingConfigs.map(this.createPromptQuestionFromConfigName);
+            const configs = missingConfigs.map((cfg) => {
+                this.createPromptQuestionFromConfigName(cfg);
+            });
             Prompt.get(configs, (err, res) => {
                 resolve();
             });
