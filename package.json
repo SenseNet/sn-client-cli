@@ -6,6 +6,15 @@
   "bin": {
     "sn-client": "./bin/sn-client.cmd"
   },
+  "files":[
+    "bin",
+    "coverage",
+    "dist",
+    "dist_tests",
+    "documentation",
+    "src",
+    "test"
+  ],
   "scripts": {
     "pretest": "npm run build:tests",
     "test": "nyc mocha -p tsconfig.test.json dist_tests/test/index.js",

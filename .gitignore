@@ -45,3 +45,5 @@ dist_tests
 # TypeDoc documentation
 documentation
 
+dist
+dist_tests
