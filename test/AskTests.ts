@@ -44,7 +44,7 @@ export class AskTests {
 
     @test('should create Prompt question from config field name')
     public createQuestionFromConfig() {
-        const q = Ask.createPromptQuestionFromConfigName('RepositoryUrl');
+        const q = Ask.createPromptQuestionFromConfigName('SnConfigModel.RepositoryUrl');
         expect(q.name).to.be.eq('RepositoryUrl');
     }
 

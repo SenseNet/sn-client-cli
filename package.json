@@ -1,6 +1,6 @@
 {
   "name": "sn-client-cli",
-  "version": "1.0.0",
+  "version": "1.0.0-development-4",
   "description": "Command line tooling for Sense/NET ECM client",
   "main": "dist/index.js",
   "bin": {
@@ -13,7 +13,8 @@
     "dist_tests",
     "documentation",
     "src",
-    "test"
+    "test",
+    "sn.config.js"
   ],
   "scripts": {
     "pretest": "npm run build:tests",
@@ -24,8 +25,9 @@
     "build": "tsc",
     "build:tests": "tsc -p tsconfig.test.json",
     "typedoc": "gulp typedoc",
-    "tslint": "tslint --project tsconfig.json && tslint --project tsconfig.test.json",
-    "commit": "git-cz"
+    "tslint": "tslint --project tsconfig.json ./src/**/*.ts && tslint --project tsconfig.test.json ./test/**/*.ts",
+    "commit": "git-cz",
+    "publish:development": "npm publish --tag development"
   },
   "repository": {
     "type": "git",
@@ -46,6 +48,8 @@
   "homepage": "https://github.com/SenseNet/sn-client-cli#readme",
   "devDependencies": {
     "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.12",
     "chai": "^3.5.0",
     "commitizen": "^2.9.6",
     "mocha": "^3.2.0",
@@ -53,12 +57,9 @@
     "prompt": "^1.0.0",
     "tslint": "^5.0.0",
     "typedoc": "^0.5.9",
-    "typescript": "^2.2.2"
+    "typescript": "^2.3.2"
   },
   "dependencies": {
-    "@types/chai": "^3.4.35",
-    "@types/mocha": "^2.2.40",
-    "@types/node": "^7.0.12",
     "adm-zip": "^0.4.7",
     "command-line-args": "^4.0.2",
     "command-line-commands": "^2.0.0",
@@ -71,7 +72,7 @@
     "gulp-run": "^1.7.1",
     "gulp-typedoc": "^2.0.2",
     "path": "^0.12.7",
-    "sn-client-js": "^1.1.1-beta.1"
+    "sn-client-js": "1.1.1-development.3"
   },
   "czConfig": {
     "path": "node_modules/cz-conventional-changelog"

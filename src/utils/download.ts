@@ -53,9 +53,12 @@ export class Download {
      */
     public async GetAsBufferAsync(): Promise<Buffer> {
         return new Promise<Buffer>((resolve) => {
+
+            const url = new URL(this.host);
+
             Http.get({
                 headers: this.headers,
-                host: this.host,
+                host: url.origin,
                 path: this.path,
             }, (response: Http.IncomingMessage) => this.HandleResponse(response, resolve));
         });

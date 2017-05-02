@@ -1,23 +1,22 @@
 import * as Path from 'path';
+import { Config } from "sn-client-js";
 import { Ask } from '../ask';
-import { SnConfigBehavior } from "./snconfigbehavior";
-import { SnConfigFieldModelStore } from "./snconfigfieldmodelstore";
-import { SnConfigModel } from "./snconfigmodel";
+import { SnCliConfigModel } from "./snconfigmodel";
 
 /**
  * This class reads, verifies and extends a configuration file from the specified project directory.
  */
-export class SnConfigReader {
+export class SnConfigReader<TConfigModel> {
 
     private readonly SN_CONFIG_NAME: string = 'sn.config.js';
 
-    public Config: SnConfigModel = new SnConfigModel();
+    public Config: TConfigModel = new this.configModelType();
 
     /**
      * @constructs SnConfigReader
      * @param projectDirectory {string} The directory to look sn.config.js for
      */
-    constructor(private projectDirectory: string) { }
+    constructor(private readonly configModelType: { new(): TConfigModel}, private projectDirectory: string) { }
 
     /**
      * Reads an sn.config.js file from the project directory, warns the user if there is no sn.config.js available
@@ -25,12 +24,12 @@ export class SnConfigReader {
      * reading is completed or the new Config model is constructed.
      */
     public async ReadConfigFile(fileName: string = this.SN_CONFIG_NAME): Promise<any> {
-        let cfg: SnConfigModel;
+        let cfg: TConfigModel;
         try {
             cfg = require(this.projectDirectory + Path.sep + fileName);
         } catch (error) {
             console.log(`No '${this.SN_CONFIG_NAME}' file found in the project root.`);
-            cfg = new SnConfigModel();
+            cfg = new this.configModelType();
         }
         this.Config = cfg;
     }
@@ -41,18 +40,18 @@ export class SnConfigReader {
      * @returns {Promise<Readonly<SnConfigModel>>} An awaitable promise with the
      * readonly SnAdminConfigModel that will contain all specified values
      */
-    public async ValidateAsync<K extends keyof SnConfigModel>(...requiredValues: K[]): Promise<Readonly<SnConfigModel>> {
+    public async ValidateAsync<K extends keyof TConfigModel>(...requiredValues: K[]): Promise<Readonly<TConfigModel>> {
         for (const fieldName of requiredValues) {
-            const fieldModel = SnConfigFieldModelStore.Get(fieldName);
+            const fieldModel = Config.SnConfigFieldModelStore.Get(`${this.configModelType.name}.${fieldName}`);
             const value = this.Config[fieldModel.FieldName];
 
-            if (value && value.length && !(fieldModel.Behavior & SnConfigBehavior.AllowFromConfig)) {
+            if (value && value.length && !(fieldModel.Behavior & Config.SnConfigBehavior.AllowFromConfig)) {
                 throw Error(`Field '${fieldName}' is not allowed in snconfig file!`);
             }
 
             if (!value || !value.length) {
                 this.Config[fieldModel.FieldName] =
-                    (fieldModel.Behavior & SnConfigBehavior.HideConsoleInput)
+                    (fieldModel.Behavior & Config.SnConfigBehavior.HideConsoleInput)
                         ?
                         await Ask.PasswordAsync(fieldModel.Question) :
                         await Ask.TextAsync(fieldModel.Question);
@@ -66,7 +65,7 @@ export class SnConfigReader {
      * Overrides the current config with the provided values
      * @param newConfig {Partial<SnCnofigModel>} The new config values
      */
-    public OverrideConfig(newConfig: Partial<SnConfigModel>) {
+    public OverrideConfig(newConfig: Partial<SnCliConfigModel>) {
         for (const field in newConfig) {
             if (newConfig[field]) {
                 this.Config[field] = newConfig[field];

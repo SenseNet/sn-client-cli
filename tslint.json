@@ -9,9 +9,10 @@
         ],
         "no-bitwise": false,
         "variable-name": [
+            true,
+            "check-format",
             "allow-leading-underscore",
-            "allow-pascal-case",
-            true
+            "allow-pascal-case"
         ],
         "max-line-length": [
             false

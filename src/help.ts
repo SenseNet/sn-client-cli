@@ -1,5 +1,5 @@
 import * as CommandLineUsage from 'command-line-usage';
-import { SnConfigFieldModel } from "./utils/snconfig/snconfigfieldmodel";
+import { Config } from "sn-client-js";
 
 /**
  * This class will be used to display help information on 'help' command or when the user enters invalit runtime arguments
@@ -10,7 +10,7 @@ export class Help {
      * Displays the help info.
      * @param validOptions {SnConfigFieldModel[]} The valid option values from the SnConfigModel
      */
-    public static Show(validOptions: SnConfigFieldModel[]) {
+    public static Show(validOptions: Config.SnConfigFieldModel[]) {
         const definitionDocs = [
             {
                 header: 'SN-Client-CLI',

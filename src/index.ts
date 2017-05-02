@@ -2,12 +2,12 @@ import * as CommadLineArgs from 'command-line-args';
 import * as CommandLineCommands from 'command-line-commands';
 import * as FileSystem from 'fs';
 import * as Path from 'path';
+import { Config } from 'sn-client-js';
 import { Help } from './help';
 import { DoInitializeConfigs } from './initialize-config';
 import { Initializer } from './initializer';
 import { DoFetchTypes } from './sn-fetch-types';
-import { SnConfigFieldModelStore } from './utils/snconfig/snconfigfieldmodelstore';
-import { SnConfigModel } from "./utils/snconfig/snconfigmodel";
+import { SnCliConfigModel } from "./utils/snconfig/snconfigmodel";
 
 /**
  * Entry point for the 'sn-client' command
@@ -35,11 +35,13 @@ const Start = async () => {
     }
 
     const validCommands = [CMD_INIT, CMD_FETCH_TYPES, CMD_HELP];
-    const validOptions = SnConfigFieldModelStore.GetCommandOptions();
+    const validOptions = Config.SnConfigFieldModelStore.GetCommandOptions();
 
     try {
         const { command } = CommandLineCommands(validCommands);
-        const options: Partial<SnConfigModel> = CommadLineArgs(validOptions.map((op) => {
+        const options: Partial<SnCliConfigModel> = CommadLineArgs(validOptions
+            .filter((op) => op.StoreKey.indexOf(SnCliConfigModel.name) === 0)
+            .map((op) => {
             return {
                 name: op.FieldName
             };
