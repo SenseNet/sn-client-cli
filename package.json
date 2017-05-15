@@ -1,6 +1,6 @@
 {
   "name": "sn-client-cli",
-  "version": "1.0.0-development-4",
+  "version": "1.0.0-RC.1",
   "description": "Command line tooling for Sense/NET ECM client",
   "main": "dist/index.js",
   "bin": {
