@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/SenseNet/sn-client-cli.svg?branch=master)](https://travis-ci.org/SenseNet/sn-client-cli)
 [![codecov](https://codecov.io/gh/SenseNet/sn-client-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/SenseNet/sn-client-cli) 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e3f64e9f929d4dbead466ba1283cf43b)](https://www.codacy.com/app/SenseNet/sn-client-cli?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SenseNet/sn-client-cli&amp;utm_campaign=Badge_Grade)
+[![Greenkeeper badge](https://badges.greenkeeper.io/SenseNet/sn-client-cli.svg)](https://greenkeeper.io/)
+
 
 This package is a command line tool for the Sense/NET Platform's [Client Library](https://github.com/SenseNet/sn-client-js "sn-client-js").
 
