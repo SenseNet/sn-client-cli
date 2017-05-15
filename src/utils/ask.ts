@@ -1,7 +1,6 @@
 import * as Prompt from 'prompt';
-import { SnConfigBehavior } from "./snconfig/snconfigbehavior";
-import { SnConfigFieldModelStore } from './snconfig/snconfigfieldmodelstore';
-import { SnConfigModel } from './snconfig/snconfigmodel';
+import { Config } from "sn-client-js";
+import { SnCliConfigModel } from './snconfig/snconfigmodel';
 
 /**
  * This class is a wrapper for command-line data input in Node.Js console applications
@@ -47,10 +46,10 @@ export class Ask {
     }
 
     public static createPromptQuestionFromConfigName(fieldName: string) {
-        const cfg = SnConfigFieldModelStore.Get(fieldName);
+        const cfg = Config.SnConfigFieldModelStore.Get(fieldName);
         return {
             description: cfg.Question,   // ??
-            hidden: cfg.Behavior | SnConfigBehavior.HideConsoleInput,
+            hidden: cfg.Behavior | Config.SnConfigBehavior.HideConsoleInput,
             name: cfg.FieldName,
         };
     }
@@ -59,10 +58,12 @@ export class Ask {
      * Asks about a list of provided config values
      * @param missingConfigs {K[]} A keys from SnConfigModel's fields which has to be asked
      */
-    public static async MissingConfigs<K extends keyof SnConfigModel>(...missingConfigs: K[]): Promise<Partial<SnConfigModel>> {
-        return new Promise<Partial<SnConfigModel>>((resolve, reject) => {
+    public static async MissingConfigs<K extends keyof SnCliConfigModel>(...missingConfigs: K[]): Promise<Partial<SnCliConfigModel>> {
+        return new Promise<Partial<SnCliConfigModel>>((resolve, reject) => {
             Prompt.start();
-            const configs = missingConfigs.map(this.createPromptQuestionFromConfigName);
+            const configs = missingConfigs.map((cfg) => {
+                this.createPromptQuestionFromConfigName(cfg);
+            });
             Prompt.get(configs, (err, res) => {
                 resolve();
             });

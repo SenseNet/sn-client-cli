@@ -12,8 +12,9 @@ This package is under development and not released yet.
 
 ## Installation
 ### Prerequisites
-* Node.JS ^6.1.0
-* NPM ^4.0.0
+* [Node.JS](https://nodejs.org) ^6.1.0
+* [NPM](https://www.npmjs.com) ^4.0.0
+* [NYC](https://www.npmjs.com/package/nyc) for running tests
 
 You can get the latest version with NPM
 

@@ -14,26 +14,26 @@ export class DownloadTests {
 
     }
 
-    @test('Shouldn\'t have custom headers by default')
-    public EmptyHeaders() {
+    @test
+    public 'Shouldn\'t have custom headers by default'() {
         expect(Object.keys(this.download['headers']).length).to.be.eq(0);
 
     }
 
-    @test('Should have a proper base64 encoded Basic Authorization header after setting up Authenticate')
-    public BasicAuthHeaders() {
+    @test
+    public 'Should have a proper base64 encoded Basic Authorization header after setting up Authenticate'() {
         this.download.Authenticate('username', 'password');
         expect(this.download['headers']['Authorization']).to.be.eq('Basic dXNlcm5hbWU6cGFzc3dvcmQ=');
     }
 
-    @test('Should return the file as awaitable Promise on GetAsBufferAsync')
-    public GetAsBufferAsync() {
+    @test
+    public 'Should return the file as awaitable Promise on GetAsBufferAsync'() {
         const buffer = this.download.GetAsBufferAsync();
         expect(buffer).to.be.an.instanceOf(Promise);
     }
 
-    @test('HandleResponse')
-    public testHandleResponse(done) {
+    @test
+    public 'HandleResponse'(done) {
         const httpMsg: Http.IncomingMessage = new Events.EventEmitter() as Http.IncomingMessage;
         httpMsg.headers = {
             'content-length': 3

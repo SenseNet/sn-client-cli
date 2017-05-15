@@ -1,5 +1,6 @@
 import * as Path from 'path';
 import { PathHelper } from "./utils/pathhelper";
+import { SnCliConfigModel } from "./utils/snconfig/snconfigmodel";
 import { SnConfigReader } from "./utils/snconfig/snconfigreader";
 import { Stage } from "./utils/stage";
 
@@ -25,8 +26,8 @@ export class Initializer {
         return this.pathHelper;
     }
 
-    private configReader: SnConfigReader;
-    public get SnConfigReader(): SnConfigReader {
+    private configReader: SnConfigReader<SnCliConfigModel>;
+    public get SnConfigReader(): SnConfigReader<SnCliConfigModel> {
         return this.configReader;
     }
 
@@ -37,7 +38,7 @@ export class Initializer {
             `${process.cwd()}${Path.sep}node_modules${Path.sep}sn-client-cli`);
         this.stage = new Stage(this.pathHelper);
         await this.stage.PrepareAsync();
-        this.configReader = new SnConfigReader(this.pathHelper.PackageRootPath);
+        this.configReader = new SnConfigReader(SnCliConfigModel, this.pathHelper.PackageRootPath);
         this.configReader.ReadConfigFile();
     }
 }

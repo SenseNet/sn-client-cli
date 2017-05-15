@@ -15,6 +15,7 @@
             "outFiles": [
                 "${workspaceRoot}\\dist\\**\\*.js"
             ],
+            "cwd": "${workspaceRoot}\\..\\aurelia-mook\\",
             "console": "integratedTerminal",
             "preLaunchTask": "build"
         },

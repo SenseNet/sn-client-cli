@@ -1,4 +1,5 @@
 import * as Http from 'http';
+import * as URL from 'url';
 
 /**
  * This class represents a Download from a specified Sense/Net Repository
@@ -51,11 +52,13 @@ export class Download {
      * Executes the download request, flatterns the data into a simple in-memory buffer
      * @returns {Promise<Buffer>} An awaitable promise with the in-memory buffer
      */
-    public GetAsBufferAsync(): Promise<Buffer> {
+    public async GetAsBufferAsync(): Promise<Buffer> {
         return new Promise<Buffer>((resolve) => {
+            const url = URL.parse(this.host);
             Http.get({
+                protocol: url.protocol,
                 headers: this.headers,
-                host: this.host,
+                host: url.host || url.path,
                 path: this.path,
             }, (response: Http.IncomingMessage) => this.HandleResponse(response, resolve));
         });

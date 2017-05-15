@@ -5,7 +5,7 @@ import { Initializer } from './initializer';
  * This function initializes a new 'sn.config.js' configuration file into an NPM package's root folder.
  */
 export async function DoInitializeConfigs(initializer: Initializer = Initializer.Current) {
-    console.log('Copying default config...');
+    console.log(`Copying default config from ${initializer.PathHelper.SnCliPath}${Path.sep}sn.config.js...`);
     try {
         await initializer.Stage.InitializeConfigAsync();
         console.log(`Copied to ${initializer.PathHelper.PackageRootPath}${Path.sep}sn.config.js`);

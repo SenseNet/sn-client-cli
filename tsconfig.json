@@ -6,12 +6,7 @@
         "experimentalDecorators": true,
         "target": "es2015",
         "sourceMap": true,
-        "inlineSources": true,
-        "types": [
-            "node",
-            "mocha",
-            "chai"
-        ]
+        "inlineSources": true
     }, 
     "files": [
         "./src/index.ts"

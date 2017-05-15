@@ -8,14 +8,14 @@ const expect = Chai.expect;
 @suite('Ask Tests')
 export class AskTests {
 
-    @test('should return an awaitable Promise')
-    public TextAsync() {
+    @test
+    public 'Ask Text should return an awaitable Promise'() {
         const promise = Ask.TextAsync('Text');
         expect(promise).to.be.instanceOf(Promise, 'Should return a promise');
     }
 
-    @test('Ask text, resolve with override')
-    public TextOverride(done) {
+    @test
+    public 'Ask text, resolve with override'(done) {
         Prompt.override = {
             Text: 'alma'
         };
@@ -25,8 +25,8 @@ export class AskTests {
         });
     }
 
-    @test('Ask password, resolve with override')
-    public PasswordOverride(done) {
+    @test
+    public 'Ask password, resolve with override'(done) {
         Prompt.override = {
             Text: 'alma'
         };
@@ -36,20 +36,20 @@ export class AskTests {
         });
     }
 
-    @test('should return an awaitable Promise')
-    public PasswordAsync() {
+    @test
+    public 'Ask Password should return an awaitable Promise'() {
         const promise = Ask.PasswordAsync('Password');
         expect(promise).to.be.an.instanceOf(Promise);
     }
 
-    @test('should create Prompt question from config field name')
-    public createQuestionFromConfig() {
-        const q = Ask.createPromptQuestionFromConfigName('RepositoryUrl');
+    @test
+    public 'should create Prompt question from config field name'() {
+        const q = Ask.createPromptQuestionFromConfigName('SnConfigModel.RepositoryUrl');
         expect(q.name).to.be.eq('RepositoryUrl');
     }
 
-    @test('should return an awaitable Promise')
-    public MissingConfigs() {
+    @test
+    public 'should return an awaitable Promise'() {
         const promise = Ask.MissingConfigs();
         expect(promise).to.be.an.instanceOf(Promise);
     }

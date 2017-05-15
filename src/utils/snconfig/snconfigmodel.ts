@@ -1,36 +1,34 @@
-import { SnConfigBehavior } from './snconfigbehavior';
-import { SnConfigField } from './snconfigfielddecorator';
+import { Config } from 'sn-client-js';
 
 /**
- * Class that represents a typed model for the Sense/Net related configuration for an NPM Package. It's values are populated from sn.config.js, from command line option or will be asked at runtime (depending on it's behavior flags).
+ * Class that represents a typed model for the Sense/Net related configuration for an NPM Package. It's values are populated from sn.config.js, from command line option or will be asked at runtime in CLI (depending on it's behavior flags).
  */
-export class SnConfigModel {
-
+export class SnCliConfigModel {
     /**
      * The root URL for the Sense/Net repository (e.g.: demo.sensenet.com)
      */
-    @SnConfigField({
-        Behavior: SnConfigBehavior.AllowFromConfig | SnConfigBehavior.AllowFromCommandLine,
+    @Config.SnConfigField({
+        Behavior: Config.SnConfigBehavior.AllowFromConfig | Config.SnConfigBehavior.AllowFromCommandLine,
         FieldDescription: 'URL to the repository (e.g.: demo.sensenet.com)',
         Question: 'Please enter your Sense/Net Site URL(e.g.:demo.sensenet.com):',
     })
     public RepositoryUrl: string;
 
     /**
-     * The Username for authentication
+     * The Username for type fetching authentication
      */
-    @SnConfigField({
-        Behavior: SnConfigBehavior.AllowFromConfig,
+    @Config.SnConfigField({
+        Behavior: Config.SnConfigBehavior.AllowFromCommandLine,
         FieldDescription: 'Name for a user',
         Question: 'Please enter the username: ',
     })
     public UserName?: string;
 
     /**
-     * The password for authentication
+     * The password for type fetching authentication
      */
-    @SnConfigField({
-        Behavior: SnConfigBehavior.HideConsoleInput,
+    @Config.SnConfigField({
+        Behavior: Config.SnConfigBehavior.HideConsoleInput,
         Question: 'Please enter the password for the user',
     })
     public Password?: string;

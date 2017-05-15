@@ -13,24 +13,24 @@ export class PathHelperTests {
         this.PathHelper = new PathHelper('c:/temp/package/../package', 'c:/temp/package/../package/node_modules/sn-client-js', 'c:/temp/package/../package/node_modules/sn-client-cli');
     }
 
-    @test('Should normalize PackageRoot path')
-    public PackageRootPath() {
+    @test
+    public 'Should normalize PackageRoot path'() {
         expect(this.PathHelper.PackageRootPath).to.be.eq(`c:${Path.sep}temp${Path.sep}package`);
     }
 
-    @test('Should normalize SnClient path')
-    public SnClientPath() {
+    @test
+    public 'Should normalize SnClient path'() {
         expect(this.PathHelper.SnClientPath).to.be.eq(`c:${Path.sep}temp${Path.sep}package${Path.sep}node_modules${Path.sep}sn-client-js`);
 
     }
 
-    @test('Should provide realible relative path to PackageRootPath')
-    public RealiblePackageRoot() {
+    @test
+    public 'Should provide realible relative path to PackageRootPath'() {
         expect(this.PathHelper.GetRelativeToPackageRootPath('./alma')).to.be.eq(Path.join(this.PathHelper.PackageRootPath, './alma'));
     }
 
-    @test('Should provide realible relative path to SnClientPath')
-    public RealibleSnClientPath() {
+    @test
+    public 'Should provide realible relative path to SnClientPath'() {
         expect(this.PathHelper.GetRelativeToSnClientPath('./alma')).to.be.eq(Path.join(this.PathHelper.SnClientPath, './alma'));
 
     }

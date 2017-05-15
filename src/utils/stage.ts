@@ -1,12 +1,11 @@
 import * as Delete from 'del';
+import * as FileSystem from 'fs-extra';
 import * as Gulp from 'gulp';
 import * as Promisify from 'gulp-promisify';
 import * as GulpRun from 'gulp-run';
 import { PathHelper } from './pathhelper';
 
 import * as Path from 'path';
-
-const TEMP_FOLDER_NAME = 'tmp';
 
 /**
  * This class is used to handle the new incoming types from the repository in a transactional way.
@@ -20,6 +19,8 @@ const TEMP_FOLDER_NAME = 'tmp';
  */
 export class Stage {
 
+    private readonly TEMP_FOLDER_NAME: string = 'tmp';
+
     /**
      * @param paths {PathHelper} Contextual path options
      * @constructs Stage
@@ -32,7 +33,7 @@ export class Stage {
      * @returns The absolute path of the Temporary folder
      */
     public get TempFolderPath(): string {
-        return `${this.paths.SnClientPath}${Path.sep}${TEMP_FOLDER_NAME}`;
+        return `${this.paths.SnClientPath}${Path.sep}${this.TEMP_FOLDER_NAME}`;
     }
 
     /**
@@ -41,7 +42,7 @@ export class Stage {
      * - Copies the existing Typescript source files and testss
      */
     public async PrepareAsync() {
-        this.Cleanup();
+        await this.CleanupAsync();
         const task = Gulp.src([
             `./src/**/*.ts`,
             `./test/**/*.ts`,
@@ -66,18 +67,18 @@ export class Stage {
                 cwd: this.TempFolderPath,
             })
             .pipe(Gulp.dest(this.paths.SnClientPath));
-        await task.resume();
+        return await task.resume();
     }
 
     public async InitializeConfigAsync() {
-        await Gulp.src([
-            './sn.config.js'
-        ], {
-                base: this.paths.SnCliPath,
-                cwd: this.paths.SnCliPath
-            })
-            .pipe(Gulp.dest(this.paths.PackageRootPath))
-            .resume();
+        const filename = 'sn.config.js';
+        return new Promise((resolve, reject) => {
+            FileSystem.copy(this.paths.GetRelativeToSnCliPath(filename), this.paths.GetRelativeToPackageRootPath(filename), (err) => {
+                if (err) {
+                    reject(err);
+                } else { resolve(); }
+            });
+        });
     }
 
     public async CallGulpRunAsync(command: string, workingDir: string): Promise<any> {
@@ -98,7 +99,14 @@ export class Stage {
     /**
      * Cleans up (deletes) the specified temporary folder
      */
-    public Cleanup() {
-        Delete.sync(this.TempFolderPath, { force: true });
+    public async CleanupAsync() {
+        return new Promise((resolve, reject) => {
+            try {
+                Delete.sync(this.TempFolderPath, { force: true });
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 }
