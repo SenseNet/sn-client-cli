@@ -13,26 +13,26 @@ export class SnConfigReaderTests {
         this.reader = new SnConfigReader(SnCliConfigModel, process.cwd());
     }
 
-    @test('ReadConfigFile should return an awaitable promise')
-    public Read() {
+    @test
+    public 'ReadConfigFile should return an awaitable promise'() {
         const promise = this.reader.ReadConfigFile();
         expect(promise).to.be.an.instanceOf(Promise);
     }
 
-    @test('Should create a new config if not exists')
-    public async ReadNonExisting() {
+    @test
+    public async 'Should create a new config if not exists'() {
         await this.reader.ReadConfigFile('invalidConfig.js');
         expect(this.reader.Config).to.be.instanceof(SnCliConfigModel);
     }
 
-    @test('ValidateAsync should return an awaitable promise')
-    public ValidatePromise() {
+    @test
+    public 'ValidateAsync should return an awaitable promise'() {
         const promise = this.reader.ValidateAsync('RepositoryUrl', 'UserName', 'Password');
         expect(promise).to.be.an.instanceOf(Promise);
     }
 
-    @test('Shouldn resolve when all fields are provided')
-    public async ValidateResolve() {
+    @test
+    public async 'Shouldn resolve when all fields are provided'() {
         this.reader.Config = {
             RepositoryUrl: 'url',
             UserName: 'username',
@@ -42,8 +42,8 @@ export class SnConfigReaderTests {
         expect(cfg.RepositoryUrl).to.be.eq('url');
     }
 
-    @test('Should throw an error if a field is provided but disallowed form config by behavior')
-    public ValidateShouldThrowWhenNotAllowed(done) {
+    @test
+    public 'Should throw an error if a field is provided but disallowed form config by behavior'(done) {
         this.reader.Config = {
             RepositoryUrl: '',
             UserName: 'user',
@@ -56,8 +56,8 @@ export class SnConfigReaderTests {
             .catch(() => done());
     }
 
-    @test('OverrideConfig should override provided value')
-    public OverrideConfigTest() {
+    @test
+    public 'OverrideConfig should override provided value'() {
 
         this.reader.Config = {
             RepositoryUrl: 'url',

@@ -17,36 +17,36 @@ export class StageTests {
         this.stage = new Stage(this.pathHelper);
     }
 
-    @test('Should have a proper temp folder path')
-    public TempFolderPath() {
+    @test
+    public 'Should have a proper temp folder path'() {
         expect(this.stage.TempFolderPath).to.be.eq(Path.join(this.pathHelper.SnClientPath, 'tmp'));
     }
 
-    @test('Prepare Should return an awaitable promise')
-    public PreparePromise() {
+    @test
+    public 'Prepare Should return an awaitable promise'() {
         const promise = this.stage.PrepareAsync();
         expect(promise).to.be.an.instanceOf(Promise);
     }
 
-    @test('InitializeConfigAsync Should return an awaitable promise')
-    public IniConfigPromise() {
+    @test
+    public 'InitializeConfigAsync Should return an awaitable promise'() {
         const promise = this.stage.InitializeConfigAsync();
         expect(promise).to.be.an.instanceOf(Promise);
     }
 
-    @test('UpdateModule Should return an awaitable promise')
-    public UpdatePromise() {
+    @test
+    public 'UpdateModule Should return an awaitable promise'() {
         const promise = this.stage.UpdateModuleAsync();
         expect(promise).to.be.an.instanceOf(Promise);
     }
 
-    @test('CallGulpAsync')
-    public async CallGulpAsync() {
+    @test
+    public async 'CallGulpAsync'() {
         await this.stage.CallGulpRunAsync('', __dirname);
     }
 
-    @test('CallGulpAsyncError')
-    public CallGulpAsyncError(done) {
+    @test
+    public 'CallGulpAsyncError'(done) {
         this.stage.CallGulpRunAsync('badCommand', __dirname).then(
             () => { done('Error expeced'); },
             (err) => { done(); }

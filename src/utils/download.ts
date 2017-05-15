@@ -1,4 +1,5 @@
 import * as Http from 'http';
+import * as URL from 'url';
 
 /**
  * This class represents a Download from a specified Sense/Net Repository
@@ -53,12 +54,11 @@ export class Download {
      */
     public async GetAsBufferAsync(): Promise<Buffer> {
         return new Promise<Buffer>((resolve) => {
-
-            const url = new URL(this.host);
-
+            const url = URL.parse(this.host);
             Http.get({
+                protocol: url.protocol,
                 headers: this.headers,
-                host: url.origin,
+                host: url.host || url.path,
                 path: this.path,
             }, (response: Http.IncomingMessage) => this.HandleResponse(response, resolve));
         });
