@@ -73,7 +73,7 @@
     "gulp-run": "^1.7.1",
     "gulp-typedoc": "^2.0.2",
     "path": "^0.12.7",
-    "sn-client-js": "2.0.0-RC.1"
+    "sn-client-js": "2.0.0-RC.2"
   },
   "czConfig": {
     "path": "node_modules/cz-conventional-changelog"
