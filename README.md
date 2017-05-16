@@ -7,7 +7,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/SenseNet/sn-client-cli.svg)](https://greenkeeper.io/)
 
 
-This package is a command line tool for the Sense/NET Platform's [Client Library](https://github.com/SenseNet/sn-client-js "sn-client-js").
+This package is a command line tool for the sensenet ECM's [Client Library](https://github.com/SenseNet/sn-client-js "sn-client-js").
 
 ## Note
 This package is under development and not released yet.
@@ -26,7 +26,7 @@ npm install sn-client-js https://github.com/SenseNet/sn-client-cli --save
 
 ## Usage
 
-From th command line, you can run:
+From the command line you can run:
 
 ``
 $ sn-client [command] --[options]
@@ -34,9 +34,9 @@ $ sn-client [command] --[options]
 
 ### Available commands
 **init** -
-Creates an initial 'sn.config.js' in your project root. You can use this for providing default configuration options to the CLI.
+Creates an initial 'sn.config.js' in your project root. You can use this providing default configuration options to the CLI.
 
 **fetch-types** - 
-If you have customized your **Sense/Net ECM repository** with custom content types, you can use this command to get the generated TypeScript classes and refresh the built-in ones in **sn-client-js** package from a _specified_ repository.
+If you have customized your **sensenet ECM repository** with custom content types, you can use this command to get the generated TypeScript classes and refresh the built-in ones in **sn-client-js** package from a _specified_ repository.
 
-**help** - Displays a help screen about the CLI, the available commands and options
+**help** - Displays a help screen about the CLI with the available commands and options
