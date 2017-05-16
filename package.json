@@ -1,7 +1,7 @@
 {
   "name": "sn-client-cli",
-  "version": "1.0.0-RC.1",
-  "description": "Command line tooling for Sense/NET ECM client",
+  "version": "1.0.0-RC.2",
+  "description": "Command line tooling for sense NET ECM client",
   "main": "dist/index.js",
   "bin": {
     "sn-client": "./bin/sn-client.cmd"
@@ -27,7 +27,7 @@
     "typedoc": "gulp typedoc",
     "tslint": "tslint --project tsconfig.json ./src/**/*.ts && tslint --project tsconfig.test.json ./test/**/*.ts",
     "commit": "git-cz",
-    "publish:development": "npm publish --tag development"
+    "publish:development": "npm run build && npm t && npm publish --tag development"
   },
   "repository": {
     "type": "git",
@@ -52,7 +52,6 @@
     "commitizen": "^2.9.6",
     "mocha": "^3.4.1",
     "mocha-typescript": "^1.1.2",
-    "prompt": "^1.0.0",
     "tslint": "^5.2.0",
     "typedoc": "^0.7.0",
     "typescript": "^2.3.2"
@@ -73,6 +72,7 @@
     "gulp-run": "^1.7.1",
     "gulp-typedoc": "^2.0.2",
     "path": "^0.12.7",
+    "prompt": "^1.0.0",   
     "sn-client-js": "2.0.0-RC.2"
   },
   "czConfig": {
