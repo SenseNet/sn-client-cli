@@ -1,12 +1,12 @@
 {
   "name": "sn-client-cli",
-  "version": "1.0.0-RC.2",
+  "version": "1.0.0-RC.3",
   "description": "Command line tooling for sense NET ECM client",
   "main": "dist/index.js",
   "bin": {
     "sn-client": "./bin/sn-client.cmd"
   },
-  "files":[
+  "files": [
     "bin",
     "coverage",
     "dist",
@@ -51,28 +51,29 @@
     "chai": "^3.5.0",
     "commitizen": "^2.9.6",
     "mocha": "^3.4.1",
-    "mocha-typescript": "^1.1.2",
+    "mocha-typescript": "^1.1.4",
     "tslint": "^5.2.0",
-    "typedoc": "^0.7.0",
+    "typedoc": "^0.7.1",
     "typescript": "^2.3.2"
   },
   "dependencies": {
     "@types/chai": "^3.5.2",
     "@types/mocha": "^2.2.41",
-    "@types/node": "^7.0.18",
+    "@types/node": "^7.0.21",
     "adm-zip": "^0.4.7",
+    "codecov": "^2.2.0",
     "command-line-args": "^4.0.4",
     "command-line-commands": "^2.0.0",
     "command-line-usage": "^4.0.0",
-    "codecov": "^2.2.0",
     "del": "^2.2.2",
+    "fs-extra": "^3.0.1",
     "gulp": "^3.9.1",
     "gulp-mocha": "^4.3.1",
     "gulp-promisify": "^1.2.2",
     "gulp-run": "^1.7.1",
     "gulp-typedoc": "^2.0.2",
     "path": "^0.12.7",
-    "prompt": "^1.0.0",   
+    "prompt": "^1.0.0",
     "sn-client-js": "2.0.0-RC.2"
   },
   "czConfig": {
