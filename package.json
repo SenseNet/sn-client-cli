@@ -48,7 +48,7 @@
   "homepage": "https://github.com/SenseNet/sn-client-cli#readme",
   "devDependencies": {
     "@types/chai": "^3.5.2",
-    "chai": "^3.5.0",
+    "chai": "^4.0.0",
     "commitizen": "^2.9.6",
     "mocha": "^3.4.1",
     "mocha-typescript": "^1.1.4",
