@@ -52,7 +52,7 @@
     "commitizen": "^2.9.6",
     "mocha": "^3.4.1",
     "mocha-typescript": "^1.1.4",
-    "tslint": "^5.4.2",
+    "tslint": "^5.4.3",
     "typedoc": "^0.7.1",
     "typescript": "^2.3.2"
   },
