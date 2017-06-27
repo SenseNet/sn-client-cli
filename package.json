@@ -57,7 +57,7 @@
     "typescript": "^2.3.2"
   },
   "dependencies": {
-    "@types/chai": "^3.5.2",
+    "@types/chai": "^4.0.1",
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.21",
     "adm-zip": "^0.4.7",
