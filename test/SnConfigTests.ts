@@ -21,7 +21,13 @@ export class SnConfigTests {
 
     @test
     public 'SnConfigFieldModelStore Should throw an error if you try to add a field that already exists'() {
-        const add = () => { Config.SnConfigFieldModelStore.Add({ FieldName: 'Example', Question: 'ExampleQuestion', Behavior: Config.SnConfigBehavior.Default }); };
+        const add = () => { Config.SnConfigFieldModelStore.Add({
+            FieldName: 'Example',
+            Question: 'ExampleQuestion',
+            Behavior: Config.SnConfigBehavior.Default,
+            StoreKey: 'Example'
+
+        }); };
         add();  // add once
         expect(add).to.throw(Error);
     }
