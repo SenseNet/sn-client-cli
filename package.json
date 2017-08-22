@@ -74,7 +74,7 @@
     "gulp-typedoc": "^2.0.2",
     "path": "^0.12.7",
     "prompt": "^1.0.0",
-    "sn-client-js": "2.2.0"
+    "sn-client-js": "2.3.0"
   },
   "czConfig": {
     "path": "node_modules/cz-conventional-changelog"
