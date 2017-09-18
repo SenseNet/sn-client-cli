@@ -36,8 +36,8 @@ export class DownloadTests {
     public 'HandleResponse'(done) {
         const httpMsg: Http.IncomingMessage = new Events.EventEmitter() as Http.IncomingMessage;
         httpMsg.headers = {
-            'content-length': 3
-        };
+            'content-length' : 3
+        } as any;
         const resolve = (bf: Buffer) => {
             expect(bf.toString()).to.be.eq('aaa');
             done();

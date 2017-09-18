@@ -32,7 +32,7 @@ export class Download {
 
     public HandleResponse(response: Http.IncomingMessage, resolve: (Buffer) => void) {
         const data = [];
-        const contentLength: number = parseInt(response.headers['content-length'], 0);
+        const contentLength: number = parseInt(response.headers['content-length'].toString(), 0);
         response.on('data', (chunk) => {
             data.push(chunk);
         });

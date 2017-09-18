@@ -47,3 +47,4 @@ documentation
 
 dist
 dist_tests
+package-lock.json
