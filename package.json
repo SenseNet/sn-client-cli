@@ -61,7 +61,7 @@
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.44",
     "adm-zip": "^0.4.7",
-    "codecov": "^2.2.0",
+    "codecov": "^3.0.0",
     "command-line-args": "^4.0.4",
     "command-line-commands": "^2.0.0",
     "command-line-usage": "^4.0.0",
