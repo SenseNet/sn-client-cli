@@ -18,8 +18,7 @@
   ],
   "scripts": {
     "pretest": "npm run build:tests",
-    "test": "nyc mocha -p tsconfig.test.json dist_tests/test/index.js",
-    "posttest": "nyc report --reporter=json && nyc report --reporter=lcov",
+    "test": "nyc mocha -p tsconfig.test.json dist_tests/test/index.js --exit",
     "report-coverage": "codecov -f coverage/*.json",
     "prebuild": "gulp clean && npm run tslint",
     "build": "tsc",
@@ -50,7 +49,7 @@
     "@types/chai": "^3.5.2",
     "chai": "^4.0.0",
     "commitizen": "^2.9.6",
-    "mocha": "^3.4.1",
+    "mocha": "^4.0.1",
     "mocha-typescript": "^1.1.4",
     "tslint": "^5.4.3",
     "typedoc": "^0.9.0",
@@ -58,24 +57,25 @@
   },
   "dependencies": {
     "@types/chai": "^4.0.5",
-    "@types/mocha": "^2.2.41",
-    "@types/node": "^8.0.44",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.53",
     "adm-zip": "^0.4.7",
     "codecov": "^3.0.0",
     "command-line-args": "^4.0.4",
     "command-line-commands": "^2.0.0",
     "command-line-usage": "^4.0.0",
     "del": "^3.0.0",
-    "fs-extra": "^4.0.0",
+    "fs-extra": "^4.0.2",
     "gulp": "^3.9.1",
     "gulp-mocha": "^4.3.1",
     "gulp-promisify": "^1.2.2",
     "gulp-run": "^1.7.1",
     "gulp-typedoc": "^2.0.2",
+    "nyc": "^11.3.0",
     "path": "^0.12.7",
     "prompt": "^1.0.0",
-    "sn-client-js": "3.0.0",
-    "sensenet-kfi-cz-conventional-changelog": "^1.0.0"
+    "sensenet-kfi-cz-conventional-changelog": "^1.0.0",
+    "sn-client-js": "3.0.0"
   },
   "config": {
     "commitizen": {
@@ -83,7 +83,16 @@
     }
   },
   "nyc": {
-    "exclude": "dist_tests/test/**/*.*"
+    "exclude": "dist_tests/test/**/*.*",
+    "include": "dist_tests/src/**/*.*",
+    "check-coverage": true,
+    "cache": true,
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text-summary",
+      "json"
+    ]
   },
   "engines": {
     "npm": "^4.1.2",
