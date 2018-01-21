@@ -6,7 +6,8 @@
         "experimentalDecorators": true,
         "target": "es2015",
         "sourceMap": true,
-        "inlineSources": true
+        "inlineSources": true,
+        "importHelpers": true
     }, 
     "files": [
         "./src/index.ts"

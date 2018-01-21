@@ -46,36 +46,36 @@
   },
   "homepage": "https://github.com/SenseNet/sn-client-cli#readme",
   "devDependencies": {
-    "@types/chai": "^3.5.2",
+    "@types/chai": "^4.1.1",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.53",
     "chai": "^4.0.0",
+    "codecov": "^3.0.0",
     "commitizen": "^2.9.6",
-    "mocha": "^4.0.1",
+    "gulp-mocha": "^5.0.0",
+    "gulp-typedoc": "^2.0.2",
     "mocha-typescript": "^1.1.4",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "sensenet-kfi-cz-conventional-changelog": "^1.0.0",
     "tslint": "^5.4.3",
     "typedoc": "^0.9.0",
     "typescript": "^2.4.2"
   },
   "dependencies": {
-    "@types/chai": "^4.0.10",
-    "@types/mocha": "^2.2.44",
-    "@types/node": "^8.0.53",
     "adm-zip": "^0.4.7",
-    "codecov": "^3.0.0",
     "command-line-args": "^4.0.4",
     "command-line-commands": "^2.0.0",
     "command-line-usage": "^4.0.0",
     "del": "^3.0.0",
     "fs-extra": "^5.0.0",
-    "gulp": "^3.9.1",
-    "gulp-mocha": "^5.0.0",
     "gulp-promisify": "^1.2.2",
     "gulp-run": "^1.7.1",
-    "gulp-typedoc": "^2.0.2",
-    "nyc": "^11.3.0",
+    "gulp": "^4.0.0",
     "path": "^0.12.7",
     "prompt": "^1.0.0",
-    "sensenet-kfi-cz-conventional-changelog": "^1.0.0",
-    "sn-client-js": "^3.0.3"
+    "sn-client-js": "^3.0.3",
+    "tslib": "^1.9.0"
   },
   "config": {
     "commitizen": {
@@ -95,7 +95,7 @@
     ]
   },
   "engines": {
-    "npm": "^4.1.2",
-    "node": "^6.1.0"
+    "npm": ">= 4.x",
+    "node": ">= 6.x"
   }
 }
