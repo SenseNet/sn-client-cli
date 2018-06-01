@@ -75,7 +75,7 @@
     "path": "^0.12.7",
     "prompt": "^1.0.0",
     "sn-client-js": "^3.0.3",
-    "tslib": "^1.9.0"
+    "tslib": "1.9.1"
   },
   "config": {
     "commitizen": {
