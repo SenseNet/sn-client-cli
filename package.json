@@ -54,7 +54,7 @@
     "commitizen": "^2.9.6",
     "gulp-mocha": "^5.0.0",
     "gulp-typedoc": "^2.2.0",
-    "mocha-typescript": "^1.1.12",
+    "mocha-typescript": "^1.1.15",
     "mocha": "^5.0.4",
     "nyc": "^12.0.2",
     "sensenet-kfi-cz-conventional-changelog": "^1.0.0",
