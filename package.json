@@ -68,7 +68,7 @@
     "command-line-commands": "^2.0.1",
     "command-line-usage": "^5.0.3",
     "del": "^3.0.0",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^7.0.0",
     "gulp": "^4.0.0",
     "gulp-promisify": "^1.2.2",
     "gulp-run": "^1.7.1",
